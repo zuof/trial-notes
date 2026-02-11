@@ -103,8 +103,8 @@ F-statistic:  1750 on 1 and 498 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
-<section id="dichotomized-model" class="level2">
-<h2 class="anchored" data-anchor-id="dichotomized-model">Dichotomized Model</h2>
+<section id="model-using-a-dichotomized-predictor" class="level2">
+<h2 class="anchored" data-anchor-id="model-using-a-dichotomized-predictor">Model Using a Dichotomized Predictor</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -189,7 +189,7 @@ font-style: inherit;">$</span>r.squared</span></code></pre></div>
 <pre><code>[1] 0.4881285</code></pre>
 </div>
 </div>
-<p>The dichotomized model throws away information. The estimated relationship becomes less precise and less powerful.</p>
+<p>The model using a dichotomized predictor throws away information. The estimated relationship becomes less precise and less powerful.</p>
 </section>
 <section id="takeaway" class="level2">
 <h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
