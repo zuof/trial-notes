@@ -34,7 +34,7 @@ fit_cont <- lm(y ~ x, data = d)
 summary(fit_cont)
 ```
 
-## Dichotomized Model
+## Model Using a Dichotomized Predictor
 
 ```{r}
 #| code-fold: true
@@ -54,7 +54,7 @@ summary(fit_cont)$r.squared
 summary(fit_cat)$r.squared
 ```
 
-The dichotomized model throws away information. The estimated relationship becomes less precise and less powerful.
+The model using a dichotomized predictor throws away information. The estimated relationship becomes less precise and less powerful.
 
 ## Takeaway
 

@@ -1,6 +1,6 @@
 ---
-title: "trial-notes"
-subtitle: "Epilepsy clinical trial design and analysis"
+title: "Trial-Notes"
+subtitle: "Epilepsy Clinical Trial Design and Analysis"
 listing:
   contents: posts/*/index.qmd
   sort: "date desc"

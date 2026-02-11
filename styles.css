@@ -54,3 +54,33 @@ h1 {
     background: #0A3277;
   }
 }
+
+
+/* Make post listings look clickable */
+.quarto-listing .listing-item {
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover effect */
+.quarto-listing .listing-item:hover {
+  border-color: #8B0000;   /* accessible crimson */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+
+/* Make title look like a link */
+.quarto-listing .listing-title a {
+  color: #8B0000;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.quarto-listing .listing-title a:hover {
+  text-decoration: underline;
+}
+
+
