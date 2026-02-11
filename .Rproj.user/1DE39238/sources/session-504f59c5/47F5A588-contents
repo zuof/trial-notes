@@ -8,8 +8,6 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-author:
-  - name: Fei Zuo
   
 format:
   html:

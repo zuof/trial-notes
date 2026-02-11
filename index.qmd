@@ -1,11 +1,10 @@
 ---
 title: "trial-notes"
+subtitle: "Epilepsy clinical trial design and analysis"
+listing:
+  contents: posts/*/index.qmd
+  sort: "date desc"
+  page-size: 10
+  fields: [date, title, subtitle, description, categories, reading-time]
+  feed: true
 ---
-
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```

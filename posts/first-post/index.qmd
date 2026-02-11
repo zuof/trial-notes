@@ -1,5 +1,6 @@
 ---
 title: "Why Dichotomizing Continuous Variables Is a Mistake"
+author: Fei Zuo
 date: 2026-02-11
 #date-modified: 2026-02-11
 subtitle: "A small simulation showing the information loss from categorizing predictors."

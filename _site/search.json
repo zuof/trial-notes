@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site\n\n\nCode\n1 + 1\n\n\n[1] 2"
+    "text": "This site is devoted to improving epilepsy clinical trial design and analysis. Emphasis is placed on maximizing information, reducing bias, and defining estimands and endpoints that reflect meaningful clinical benefit. I discuss trial design, seizure-count and time-to-event outcomes, missing data, placebo response, multiplicity, heterogeneity of treatment effect, and the gap between statistical significance and clinical decision-making. Practical R examples accompany many posts."
   },
   {
     "objectID": "posts/first-post/index.html",
@@ -53,6 +53,20 @@
     "href": "index.html",
     "title": "trial-notes",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\nCode\n1 + 1\n\n\n[1] 2"
+    "text": "Why Dichotomizing Continuous Variables Is a Mistake\n\n\nA small simulation showing the information loss from categorizing predictors.\n\n\n\nregression\n\n\nmodelling\n\n\nsimulation\n\n\n\n\n\n\n\n\n\nFebruary 11, 2026\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About",
+    "section": "Education",
+    "text": "Education\n\nMSc in Biostatistics, University of Toronto, 2020\nMPH in Epidemiology, University of Toronto, 2013"
+  },
+  {
+    "objectID": "about.html#fei-zuo",
+    "href": "about.html#fei-zuo",
+    "title": "About",
+    "section": "Fei Zuo",
+    "text": "Fei Zuo\nMy research interests include trial methodology, estimands and endpoint strategy, Bayesian statistics, and transparent reporting for regulatory and clinical decision-making."
   }
 ]
