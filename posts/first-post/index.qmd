@@ -45,7 +45,7 @@ fit_cat <- lm(y ~ x_cat, data = d)
 summary(fit_cat)
 ```
 
-## **Comparing R-squared**
+## Comparing R-squared
 
 ```{r}
 #| code-fold: true

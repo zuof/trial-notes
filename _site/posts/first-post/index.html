@@ -151,7 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#simulation-setup" id="toc-simulation-setup" class="nav-link active" data-scroll-target="#simulation-setup">Simulation Setup</a></li>
   <li><a href="#correct-model-continuous-predictor" id="toc-correct-model-continuous-predictor" class="nav-link" data-scroll-target="#correct-model-continuous-predictor">Correct Model (Continuous Predictor)</a></li>
   <li><a href="#dichotomized-model" id="toc-dichotomized-model" class="nav-link" data-scroll-target="#dichotomized-model">Dichotomized Model</a></li>
-  <li><a href="#comparing-r-squared" id="toc-comparing-r-squared" class="nav-link" data-scroll-target="#comparing-r-squared"><strong>Comparing R-squared</strong></a></li>
+  <li><a href="#comparing-r-squared" id="toc-comparing-r-squared" class="nav-link" data-scroll-target="#comparing-r-squared">Comparing R-squared</a></li>
   <li><a href="#takeaway" id="toc-takeaway" class="nav-link" data-scroll-target="#takeaway">Takeaway</a></li>
   </ul>
 </nav>
@@ -276,7 +276,7 @@ F-statistic: 474.9 on 1 and 498 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </section>
 <section id="comparing-r-squared" class="level2">
-<h2 class="anchored" data-anchor-id="comparing-r-squared"><strong>Comparing R-squared</strong></h2>
+<h2 class="anchored" data-anchor-id="comparing-r-squared">Comparing R-squared</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -395,7 +395,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/zuof\.github\.io\/trial-notes\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
