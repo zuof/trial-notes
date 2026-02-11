@@ -6,8 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Fei Zuo">
 <meta name="dcterms.date" content="2026-02-11">
-<meta name="description" content="A small simulation showing the information loss from categorizing predictors.">
 
 <title>Why Dichotomizing Continuous Variables Is a Mistake – trial-notes</title>
 <style>
@@ -149,6 +149,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#simulation-setup" id="toc-simulation-setup" class="nav-link active" data-scroll-target="#simulation-setup">Simulation Setup</a></li>
+  <li><a href="#correct-model-continuous-predictor" id="toc-correct-model-continuous-predictor" class="nav-link" data-scroll-target="#correct-model-continuous-predictor">Correct Model (Continuous Predictor)</a></li>
+  <li><a href="#dichotomized-model" id="toc-dichotomized-model" class="nav-link" data-scroll-target="#dichotomized-model">Dichotomized Model</a></li>
+  <li><a href="#comparing-r-squared" id="toc-comparing-r-squared" class="nav-link" data-scroll-target="#comparing-r-squared"><strong>Comparing R-squared</strong></a></li>
+  <li><a href="#takeaway" id="toc-takeaway" class="nav-link" data-scroll-target="#takeaway">Takeaway</a></li>
   </ul>
 </nav>
     </div>
@@ -158,22 +162,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Why Dichotomizing Continuous Variables Is a Mistake</h1>
+<p class="subtitle lead">A small simulation showing the information loss from categorizing predictors.</p>
   <div class="quarto-categories">
     <div class="quarto-category">regression</div>
-    <div class="quarto-category">modeling</div>
+    <div class="quarto-category">modelling</div>
     <div class="quarto-category">simulation</div>
   </div>
   </div>
 
-<div>
-  <div class="description">
-    A small simulation showing the information loss from categorizing predictors.
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Fei Zuo </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -190,12 +196,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Many applied papers still split continuous predictors into “high” vs “low”.<br>
-This feels simple. It is not harmless.</p>
+<p>Many applied papers still dichotomize continuous predictors. This feels simple. It is not harmless.</p>
 <p>Let’s simulate a clean linear relationship and see what happens.</p>
 <section id="simulation-setup" class="level2">
 <h2 class="anchored" data-anchor-id="simulation-setup">Simulation Setup</h2>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
@@ -203,8 +210,11 @@ This feels simple. It is not harmless.</p>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>Correct Model (Continuous Predictor)</p>
+</section>
+<section id="correct-model-continuous-predictor" class="level2">
+<h2 class="anchored" data-anchor-id="correct-model-continuous-predictor">Correct Model (Continuous Predictor)</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -232,7 +242,9 @@ Multiple R-squared:  0.7785,    Adjusted R-squared:  0.778
 F-statistic:  1750 on 1 and 498 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Dichotomized Model</p>
+</section>
+<section id="dichotomized-model" class="level2">
+<h2 class="anchored" data-anchor-id="dichotomized-model">Dichotomized Model</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -262,7 +274,9 @@ Multiple R-squared:  0.4881,    Adjusted R-squared:  0.4871
 F-statistic: 474.9 on 1 and 498 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Comparing R-squared</p>
+</section>
+<section id="comparing-r-squared" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-r-squared"><strong>Comparing R-squared</strong></h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -280,7 +294,9 @@ F-statistic: 474.9 on 1 and 498 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>The dichotomized model throws away information. The estimated relationship becomes less precise and less powerful.</p>
-<p>Takeaway</p>
+</section>
+<section id="takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
 <p>Categorizing a continuous predictor reduces statistical efficiency and can distort inference. Unless there is a compelling clinical or decision-based reason, keep predictors continuous.</p>
 
 
@@ -379,7 +395,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/zuof\.github\.io\/trial-notes\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
