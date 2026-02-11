@@ -1,23 +1,58 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n\nCode\n1 + 1\n\n\n[1] 2"
+  },
+  {
     "objectID": "posts/first-post/index.html",
     "href": "posts/first-post/index.html",
     "title": "Why Dichotomizing Continuous Variables Is a Mistake",
     "section": "",
-    "text": "Many applied papers still split continuous predictors into “high” vs “low”.\nThis feels simple. It is not harmless.\nLet’s simulate a clean linear relationship and see what happens."
+    "text": "Many applied papers still dichotomize continuous predictors. This feels simple. It is not harmless.\nLet’s simulate a clean linear relationship and see what happens."
   },
   {
     "objectID": "posts/first-post/index.html#simulation-setup",
     "href": "posts/first-post/index.html#simulation-setup",
     "title": "Why Dichotomizing Continuous Variables Is a Mistake",
     "section": "Simulation Setup",
-    "text": "Simulation Setup\n\nset.seed(1)\n\nn &lt;- 500\nx &lt;- rnorm(n)\ny &lt;- 2*x + rnorm(n)\n\nd &lt;- data.frame(x, y)\n\nCorrect Model (Continuous Predictor)\n\n\nCode\nfit_cont &lt;- lm(y ~ x, data = d)\nsummary(fit_cont)\n\n\n\nCall:\nlm(formula = y ~ x, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.94113 -0.74507  0.01663  0.72882  3.11131 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.04496    0.04730  -0.951    0.342    \nx            1.95692    0.04678  41.832   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.057 on 498 degrees of freedom\nMultiple R-squared:  0.7785,    Adjusted R-squared:  0.778 \nF-statistic:  1750 on 1 and 498 DF,  p-value: &lt; 2.2e-16\n\n\nDichotomized Model\n\n\nCode\nd$x_cat &lt;- ifelse(d$x &gt; median(d$x), 1, 0)\n\nfit_cat &lt;- lm(y ~ x_cat, data = d)\nsummary(fit_cat)\n\n\n\nCall:\nlm(formula = y ~ x_cat, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.6942 -1.1305 -0.0022  1.0593  6.1757 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  -1.5672     0.1017  -15.42   &lt;2e-16 ***\nx_cat         3.1330     0.1438   21.79   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.607 on 498 degrees of freedom\nMultiple R-squared:  0.4881,    Adjusted R-squared:  0.4871 \nF-statistic: 474.9 on 1 and 498 DF,  p-value: &lt; 2.2e-16\n\n\nComparing R-squared\n\n\nCode\nsummary(fit_cont)$r.squared\n\n\n[1] 0.7784605\n\n\nCode\nsummary(fit_cat)$r.squared\n\n\n[1] 0.4881285\n\n\nThe dichotomized model throws away information. The estimated relationship becomes less precise and less powerful.\nTakeaway\nCategorizing a continuous predictor reduces statistical efficiency and can distort inference. Unless there is a compelling clinical or decision-based reason, keep predictors continuous."
+    "text": "Simulation Setup\n\n\nCode\nset.seed(1)\n\nn &lt;- 500\nx &lt;- rnorm(n)\ny &lt;- 2*x + rnorm(n)\n\nd &lt;- data.frame(x, y)"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "posts/first-post/index.html#correct-model-continuous-predictor",
+    "href": "posts/first-post/index.html#correct-model-continuous-predictor",
+    "title": "Why Dichotomizing Continuous Variables Is a Mistake",
+    "section": "Correct Model (Continuous Predictor)",
+    "text": "Correct Model (Continuous Predictor)\n\n\nCode\nfit_cont &lt;- lm(y ~ x, data = d)\nsummary(fit_cont)\n\n\n\nCall:\nlm(formula = y ~ x, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.94113 -0.74507  0.01663  0.72882  3.11131 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.04496    0.04730  -0.951    0.342    \nx            1.95692    0.04678  41.832   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.057 on 498 degrees of freedom\nMultiple R-squared:  0.7785,    Adjusted R-squared:  0.778 \nF-statistic:  1750 on 1 and 498 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "posts/first-post/index.html#dichotomized-model",
+    "href": "posts/first-post/index.html#dichotomized-model",
+    "title": "Why Dichotomizing Continuous Variables Is a Mistake",
+    "section": "Dichotomized Model",
+    "text": "Dichotomized Model\n\n\nCode\nd$x_cat &lt;- ifelse(d$x &gt; median(d$x), 1, 0)\n\nfit_cat &lt;- lm(y ~ x_cat, data = d)\nsummary(fit_cat)\n\n\n\nCall:\nlm(formula = y ~ x_cat, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.6942 -1.1305 -0.0022  1.0593  6.1757 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  -1.5672     0.1017  -15.42   &lt;2e-16 ***\nx_cat         3.1330     0.1438   21.79   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.607 on 498 degrees of freedom\nMultiple R-squared:  0.4881,    Adjusted R-squared:  0.4871 \nF-statistic: 474.9 on 1 and 498 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "posts/first-post/index.html#comparing-r-squared",
+    "href": "posts/first-post/index.html#comparing-r-squared",
+    "title": "Why Dichotomizing Continuous Variables Is a Mistake",
+    "section": "Comparing R-squared",
+    "text": "Comparing R-squared\n\n\nCode\nsummary(fit_cont)$r.squared\n\n\n[1] 0.7784605\n\n\nCode\nsummary(fit_cat)$r.squared\n\n\n[1] 0.4881285\n\n\nThe dichotomized model throws away information. The estimated relationship becomes less precise and less powerful."
+  },
+  {
+    "objectID": "posts/first-post/index.html#takeaway",
+    "href": "posts/first-post/index.html#takeaway",
+    "title": "Why Dichotomizing Continuous Variables Is a Mistake",
+    "section": "Takeaway",
+    "text": "Takeaway\nCategorizing a continuous predictor reduces statistical efficiency and can distort inference. Unless there is a compelling clinical or decision-based reason, keep predictors continuous."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "trial-notes",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\nCode\n1 + 1\n\n\n[1] 2"
   }
 ]
