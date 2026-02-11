@@ -1,5 +1,11 @@
 [
   {
+    "listing": "/Posts.html",
+    "items": [
+      "/posts/dichotomize/index.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
       "/posts/dichotomize/index.html"
