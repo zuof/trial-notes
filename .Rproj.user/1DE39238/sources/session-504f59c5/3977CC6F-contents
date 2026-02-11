@@ -1,0 +1,60 @@
+---
+title: "Why Dichotomizing Continuous Variables Is a Mistake"
+date: 2026-02-11
+description: "A small simulation showing the information loss from categorizing predictors."
+categories: [regression, modeling, simulation]
+---
+
+Many applied papers still split continuous predictors into “high” vs “low”.  
+This feels simple. It is not harmless.
+
+Let’s simulate a clean linear relationship and see what happens.
+
+## Simulation Setup
+
+```{r}
+#| message: false
+#| warning: false
+
+set.seed(1)
+
+n <- 500
+x <- rnorm(n)
+y <- 2*x + rnorm(n)
+
+d <- data.frame(x, y)
+```
+
+Correct Model (Continuous Predictor)
+```{r}
+#| code-fold: true
+fit_cont <- lm(y ~ x, data = d)
+summary(fit_cont)
+```
+
+Dichotomized Model
+```{r}
+#| code-fold: true
+
+d$x_cat <- ifelse(d$x > median(d$x), 1, 0)
+
+fit_cat <- lm(y ~ x_cat, data = d)
+summary(fit_cat)
+```
+
+Comparing R-squared
+```{r}
+#| code-fold: true
+
+summary(fit_cont)$r.squared
+summary(fit_cat)$r.squared
+```
+
+The dichotomized model throws away information.
+The estimated relationship becomes less precise and less powerful.
+
+Takeaway
+
+Categorizing a continuous predictor reduces statistical efficiency and can distort inference.
+Unless there is a compelling clinical or decision-based reason, keep predictors continuous.
+
