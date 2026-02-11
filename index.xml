@@ -164,7 +164,7 @@ F-statistic: 474.9 on 1 and 498 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </section>
 <section id="comparing-r-squared" class="level2">
-<h2 class="anchored" data-anchor-id="comparing-r-squared"><strong>Comparing R-squared</strong></h2>
+<h2 class="anchored" data-anchor-id="comparing-r-squared">Comparing R-squared</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
