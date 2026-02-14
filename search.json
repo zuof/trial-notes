@@ -4,21 +4,21 @@
     "href": "Posts.html",
     "title": "Posts",
     "section": "",
-    "text": "Why Block Size Should Not Appear in the Protocol or SAP\n\n\nAllocation concealment is not the same as blinding — and publishing block size can compromise the integrity of randomization.\n\n\n\ntrial design\n\n\nrandomization\n\n\n\n\n\n\n\n\n\nFebruary 13, 2026\n\n\n6 min\n\n\n\n\n\n\n\nWhy Dichotomizing Continuous Variables Is a Mistake\n\n\nA small simulation showing the information loss from categorizing predictors.\n\n\n\nregression\n\n\nmodelling\n\n\nsimulation\n\n\n\n\n\n\n\n\n\nFebruary 11, 2026\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Why Block Size Should Not Appear in the Protocol or SAP\n\n\nAllocation concealment is not the same as blinding and publishing block size can compromise the integrity of randomization.\n\n\n\ntrial design\n\n\nrandomization\n\n\n\n\n\n\n\n\n\nFebruary 13, 2026\n\n\n5 min\n\n\n\n\n\n\n\nWhy Dichotomizing Continuous Variables Is a Mistake\n\n\nA small simulation showing the information loss from categorizing predictors.\n\n\n\nregression\n\n\nmodelling\n\n\nsimulation\n\n\n\n\n\n\n\n\n\nFebruary 11, 2026\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Trial-Notes",
     "section": "",
-    "text": "Why Block Size Should Not Appear in the Protocol or SAP\n\n\nAllocation concealment is not the same as blinding — and publishing block size can compromise the integrity of randomization.\n\n\n\ntrial design\n\n\nrandomization\n\n\n\n\n\n\n\n\n\nFebruary 13, 2026\n\n\n6 min\n\n\n\n\n\n\n\nWhy Dichotomizing Continuous Variables Is a Mistake\n\n\nA small simulation showing the information loss from categorizing predictors.\n\n\n\nregression\n\n\nmodelling\n\n\nsimulation\n\n\n\n\n\n\n\n\n\nFebruary 11, 2026\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Why Block Size Should Not Appear in the Protocol or SAP\n\n\nAllocation concealment is not the same as blinding and publishing block size can compromise the integrity of randomization.\n\n\n\ntrial design\n\n\nrandomization\n\n\n\n\n\n\n\n\n\nFebruary 13, 2026\n\n\n5 min\n\n\n\n\n\n\n\nWhy Dichotomizing Continuous Variables Is a Mistake\n\n\nA small simulation showing the information loss from categorizing predictors.\n\n\n\nregression\n\n\nmodelling\n\n\nsimulation\n\n\n\n\n\n\n\n\n\nFebruary 11, 2026\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/dichotomize/index.html",
     "href": "posts/dichotomize/index.html",
     "title": "Why Dichotomizing Continuous Variables Is a Mistake",
     "section": "",
-    "text": "Many trial analyses still dichotomize continuous predictors. This feels simple. It is not harmless.\nLet’s simulate a clean linear relationship and see what happens."
+    "text": "Many clinical trial analyses still dichotomize continuous predictors. This feels simple. It is not harmless.\nLet’s simulate a clean linear relationship and see what happens."
   },
   {
     "objectID": "posts/dichotomize/index.html#simulation-setup",
@@ -67,7 +67,7 @@
     "href": "posts/block/index.html#regulatory-and-reporting-standards-emphasize-concealment-not-disclosure-of-block-size",
     "title": "Why Block Size Should Not Appear in the Protocol or SAP",
     "section": "Regulatory and Reporting Standards Emphasize Concealment — Not Disclosure of Block Size",
-    "text": "Regulatory and Reporting Standards Emphasize Concealment — Not Disclosure of Block Size\nMajor regulatory and reporting guidance documents are clear about the importance of allocation concealment — but notably do not require disclosure of block size in protocols or SAPs.\nICH E9 (Statistical Principles for Clinical Trials)\nICH E9 states:\n\n“The method of randomisation should ensure that treatment allocation is unpredictable.”\n\nUnpredictability is the core principle. If the block size is known to investigators, predictability can arise — directly conflicting with this requirement.\nICH E6 (Good Clinical Practice)\nICH E6 emphasizes safeguarding the randomization process:\n\n“The investigator should ensure that the randomization procedures are followed and that the code is broken only in accordance with the protocol.”\n\nMaintaining control of the randomization schedule — including operational details like block size — is part of preserving its integrity.\nCONSORT 2010 Statement\nCONSORT distinguishes clearly between:\n\nSequence generation\nAllocation concealment mechanism\n\nItem 9 of the CONSORT 2010 checklist requires:\n\n“Mechanism used to implement the random allocation sequence (such as sequentially numbered containers), describing any steps taken to conceal the sequence until interventions were assigned.”\n\nImportantly, CONSORT focuses on how concealment was ensured, not on revealing details that would undermine it."
+    "text": "Regulatory and Reporting Standards Emphasize Concealment — Not Disclosure of Block Size\nMajor regulatory and reporting guidance documents are clear about the importance of allocation concealment. Notably, they do not require disclosure of block size in protocols or SAPs.\nICH E9 (Statistical Principles for Clinical Trials)\nICH E9 states:\n\n“The method of randomisation should ensure that treatment allocation is unpredictable.”\n\nUnpredictability is the core principle. If the block size is known to investigators, predictability can arise — directly conflicting with this requirement.\nICH E6 (Good Clinical Practice)\nICH E6 emphasizes safeguarding the randomization process:\n\n“The investigator should ensure that the randomization procedures are followed and that the code is broken only in accordance with the protocol.”\n\nMaintaining control of the randomization schedule including operational details like block size is part of preserving its integrity.\nCONSORT 2010 Statement\nCONSORT distinguishes clearly between:\n\nSequence generation\nAllocation concealment mechanism\n\nItem 9 of the CONSORT 2010 checklist requires:\n\n“Mechanism used to implement the random allocation sequence (such as sequentially numbered containers), describing any steps taken to conceal the sequence until interventions were assigned.”\n\nImportantly, CONSORT focuses on how concealment was ensured, not on revealing details that would undermine it."
   },
   {
     "objectID": "posts/block/index.html#the-purpose-of-block-randomization",
@@ -81,7 +81,7 @@
     "href": "posts/block/index.html#the-problem-predictability",
     "title": "Why Block Size Should Not Appear in the Protocol or SAP",
     "section": "The Problem: Predictability",
-    "text": "The Problem: Predictability\nIf investigators know the block size, allocation can become predictable.\nImagine:\n\n1:1 randomization\nBlock size = 4\nThree patients in a block have already been assigned: A, B, A\n\nWhat is the fourth assignment?\nIt must be B.\nAt that point, allocation is no longer random in practice — it is deducible.\nThe mere ability to anticipate the next assignment can influence enrollment decisions in small but systematic ways:\n\nDelaying enrollment of a “difficult” patient\nAccelerating enrollment of a “good prognosis” patient\nSelectively enrolling borderline-eligible patients\n\nThis introduces selection bias, even in a formally randomized trial. That is a failure of allocation concealment."
+    "text": "The Problem: Predictability\nIf investigators know the block size, allocation can become predictable.\nImagine:\n\n1:1 randomization\nBlock size = 4\nThree patients in a block have already been assigned: A, B, A\n\nWhat is the fourth assignment?\nIt must be B.\nAt that point, allocation is no longer random in practice. It is deducible.\nThe mere ability to anticipate the next assignment can influence enrollment decisions in small but systematic ways:\n\nDelaying enrollment of a “difficult” patient\nAccelerating enrollment of a “good prognosis” patient\nSelectively enrolling borderline-eligible patients\n\nThis introduces selection bias, even in a formally randomized trial. That is a failure of allocation concealment."
   },
   {
     "objectID": "posts/block/index.html#allocation-concealment-blinding",
@@ -95,7 +95,7 @@
     "href": "posts/block/index.html#why-block-size-does-not-belong-in-the-protocol-or-sap",
     "title": "Why Block Size Should Not Appear in the Protocol or SAP",
     "section": "Why Block Size Does Not Belong in the Protocol or SAP",
-    "text": "Why Block Size Does Not Belong in the Protocol or SAP\nThe protocol and SAP are often widely distributed:\n\nInvestigators\nCoordinators\nSponsors\nRegulators\nData monitoring committees\n\nIf the block size is written there, it is no longer protected.\nEven stating: ““Randomization will use permuted blocks of size 4” is enough to compromise concealment.\nBest practice is:\n\nThe protocol states that blocked randomization will be used.\nThe SAP describes the randomization method in general terms.\nThe actual block size (and any random variation in block size) is known only to:\n\nThe unblinded statistician\nThe randomization unit/vendor/system\n\n\nThis protects allocation concealment while still maintaining transparency about the design."
+    "text": "Why Block Size Does Not Belong in the Protocol or SAP\nThe protocol and SAP are often widely distributed:\n\nInvestigators\nCoordinators\nSponsors\nRegulators\nData monitoring committees\n\nIf the block size is written there, it is no longer protected.\nBest practice is:\n\nThe protocol states that blocked randomization will be used.\nThe SAP describes the randomization method in general terms.\nThe actual block size (and any random variation in block size) is known only to:\n\nThe unblinded statistician\nThe randomization unit/vendor/system\n\n\nThis protects allocation concealment while still maintaining transparency about the design."
   },
   {
     "objectID": "posts/block/index.html#fixed-block-sizes",
@@ -123,7 +123,7 @@
     "href": "posts/block/index.html#takeaway",
     "title": "Why Block Size Should Not Appear in the Protocol or SAP",
     "section": "Takeaway",
-    "text": "Takeaway\n\nBlock size is an operational detail — not a scientific one.\nIts disclosure does not improve reproducibility, transparency, or statistical validity. But it can undermine allocation concealment.\nAnd once allocation concealment is compromised, the trial is vulnerable to selection bias even if it remains fully blinded.\nProtecting allocation concealment is protecting the integrity of randomization itself.\nBlock size belongs with the unblinded randomization statistician/unit and nowhere else.\nRegulators do not require disclosure of block size in public-facing documents."
+    "text": "Takeaway\n\nBlock size is an operational detail. Its disclosure does not improve reproducibility, transparency, or statistical validity. But it can undermine allocation concealment.\nAnd once allocation concealment is compromised, the trial is vulnerable to selection bias even if it remains fully blinded.\nProtecting allocation concealment is protecting the integrity of randomization itself.\nBlock size belongs with the unblinded randomization statistician/unit and nowhere else.\nRegulators do not require disclosure of block size in public-facing documents."
   },
   {
     "objectID": "posts/block/index.html#references",

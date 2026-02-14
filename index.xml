@@ -20,7 +20,7 @@
 
 
 
-<p>In randomized trials, we talk a lot about blinding. But an equally important and subtly different concept is <strong>allocation concealment</strong>.</p>
+<p>In randomized trials, we talk a lot about blinding. But an equally important and subtly different concept is allocation concealment.</p>
 <p>They are not the same thing.</p>
 <ul>
 <li><p><strong>Blinding</strong> protects against bias <em>after</em> treatment is assigned (e.g., biased outcome assessment).</p></li>
@@ -29,7 +29,7 @@
 <p>And this is exactly where <strong>block size</strong> becomes dangerous.</p>
 <section id="regulatory-and-reporting-standards-emphasize-concealment-not-disclosure-of-block-size" class="level2">
 <h2 class="anchored" data-anchor-id="regulatory-and-reporting-standards-emphasize-concealment-not-disclosure-of-block-size">Regulatory and Reporting Standards Emphasize Concealment — Not Disclosure of Block Size</h2>
-<p>Major regulatory and reporting guidance documents are clear about the importance of allocation concealment — but notably <strong>do not require disclosure of block size in protocols or SAPs</strong>.</p>
+<p>Major regulatory and reporting guidance documents are clear about the importance of allocation concealment. Notably, they <strong>do not require disclosure of block size in protocols or SAPs</strong>.</p>
 <p><strong>ICH E9 (Statistical Principles for Clinical Trials)</strong></p>
 <p>ICH E9 states:</p>
 <blockquote class="blockquote">
@@ -41,7 +41,7 @@
 <blockquote class="blockquote">
 <p>“The investigator should ensure that the randomization procedures are followed and that the code is broken only in accordance with the protocol.”</p>
 </blockquote>
-<p>Maintaining control of the randomization schedule — including operational details like block size — is part of preserving its integrity.</p>
+<p>Maintaining control of the randomization schedule including operational details like block size is part of preserving its integrity.</p>
 <p><strong>CONSORT 2010 Statement</strong></p>
 <p>CONSORT distinguishes clearly between:</p>
 <ul>
@@ -75,7 +75,7 @@
 </ul>
 <p>What is the fourth assignment?</p>
 <p>It must be B.</p>
-<p>At that point, allocation is no longer random in practice — it is deducible.</p>
+<p>At that point, allocation is no longer random in practice. It is deducible.</p>
 <p>The mere ability to anticipate the next assignment can influence enrollment decisions in small but systematic ways:</p>
 <ul>
 <li><p>Delaying enrollment of a “difficult” patient</p></li>
@@ -115,7 +115,6 @@
 <li><p>Data monitoring committees</p></li>
 </ul>
 <p>If the block size is written there, it is no longer protected.</p>
-<p>Even stating: ““Randomization will use permuted blocks of size 4” is enough to compromise concealment.</p>
 <p>Best practice is:</p>
 <ul>
 <li><p>The protocol states that blocked randomization will be used.</p></li>
@@ -158,8 +157,7 @@
 <section id="takeaway" class="level2">
 <h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
 <ul>
-<li><p>Block size is an operational detail — not a scientific one.</p></li>
-<li><p>Its disclosure does not improve reproducibility, transparency, or statistical validity. But it can undermine allocation concealment.</p></li>
+<li><p>Block size is an operational detail. Its disclosure does not improve reproducibility, transparency, or statistical validity. But it can undermine allocation concealment.</p></li>
 <li><p>And once allocation concealment is compromised, the trial is vulnerable to selection bias even if it remains fully blinded.</p></li>
 <li><p>Protecting allocation concealment is protecting the integrity of randomization itself.</p></li>
 <li><p>Block size belongs with the unblinded randomization statistician/unit and nowhere else.</p></li>
@@ -197,7 +195,7 @@
 
 
 
-<p>Many trial analyses still dichotomize continuous predictors. This feels simple. It is not harmless.</p>
+<p>Many clinical trial analyses still dichotomize continuous predictors. This feels simple. It is not harmless.</p>
 <p>Let’s simulate a clean linear relationship and see what happens.</p>
 <section id="simulation-setup" class="level2">
 <h2 class="anchored" data-anchor-id="simulation-setup">Simulation setup</h2>
