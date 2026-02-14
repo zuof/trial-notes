@@ -1,0 +1,680 @@
+---
+title: "Why Adjust for Baseline Covariates"
+author: Fei Zuo
+date: 2026-02-12
+#date-modified: 2026-02-11
+subtitle: "Maximizing information by reducing unexplained heterogeneity in seizure outcomes"
+categories: [trial design, covariate adjustment, regression, modelling, simulation]
+draft: true
+---
+
+
+
+## The clinician question (and the key misunderstanding)
+
+A common objection I hear is: “It makes no sense to adjust for patient age in seizure analyses. Age isn’t known to predict seizures in this population.”
+
+This mixes up two different goals:
+
+-   **Causal / scientific explanation** (“does age cause seizures?”)
+
+-   **Precision in estimating a randomized treatment effect** (“can age explain outcome variability within arms?”)
+
+In a randomized trial, covariate adjustment uses *baseline information* to explain some of the outcome heterogeneity that would otherwise sit in the residual error term. Less residual noise → **smaller standard error** → **more power**, for the *same* sample size.
+
+Even if a covariate is only a **weak** predictor, it can still help. And importantly:
+
+-   If the covariate is truly unrelated to the outcome, adjustment usually costs little (you may lose a hair of precision, but often negligible), while
+
+-   If it explains even modest variability, gains can be meaningful.
+
+## A simple “why it works”
+
+For many common estimators (e.g., ANCOVA-type adjustment in linear models), a rough rule of thumb is:
+
+$$
+\mathrm{Var}(\hat{\Delta}_{\text{adj}})
+\approx
+(1 - R^2)\,
+\mathrm{Var}(\hat{\Delta}_{\text{unadj}})
+$$
+
+where R\^2 is the proportion of outcome variability explained by baseline covariates *within arms*.
+
+So if baseline covariates explain even **10%** of the variability (R\^2=0.10), you can get about a **10% variance reduction**, i.e. about a **5% SE reduction**. That can matter a lot for borderline-powered trials.
+
+## Simulation setup: seizure counts with heterogeneous baseline risk
+
+
+
+```{r}
+
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+
+set.seed(123)
+```
+
+
+
+## Data generator
+
+-   Eligibility criterion: Patients must have ≥ 4 seizures during the baseline period to enroll.\
+
+    This mirrors common epilepsy trial inclusion criteria and induces truncation in the baseline distribution.
+
+::: aside
+**Eligibility criterion:**\
+Patients are required to have ≥ 4 baseline seizures. This truncates the baseline distribution and induces a regression-to-the-mean phenomenon, but does not change the precision mechanism discussed in the main text.
+:::
+
+-   Two-arm randomized trial (1:1 allocation)
+
+    Randomization occurs after eligibility is determined.
+
+-   Two observation periods:
+
+    -   A **baseline period** (e.g., 28 days)
+
+    -   A **post-randomization follow-up period** (e.g., 28 days for simplicity)
+
+-   Latent patient-level heterogeneity:
+
+    Each patient has an unobserved seizure propensity (a log-scale random effect).\
+
+    This latent severity drives both baseline and post-randomization seizure rates.
+
+-   Seizure counts follow a negative binomial distribution
+
+    This allows overdispersion relative to a Poisson model and reflects real-world seizure variability.
+
+-   Age modestly shifts the baseline log seizure rate
+
+    Age is included as a small prognostic factor affecting both baseline and follow-up seizure rates.
+
+-   Treatment multiplies the rate by a constant factor
+
+    The true treatment effect is a constant rate ratio (no treatment-by-covariate interaction).
+
+Because baseline and follow-up counts share the same underlying latent severity, baseline seizure frequency becomes strongly prognostic of follow-up seizures. Adjusting for baseline therefore removes persistent between-patient heterogeneity and improves precision.
+
+
+
+```{r}
+sim_one_trial <- function(
+  n = 200,
+  min_base = 4, #eligibility: >= 4 seizures at baseline
+  rr_trt = 0.80,   # true rate ratio (treatment vs control)
+  beta_age = 0.25, # strength of age effect on log-rate (per 10-year SD units)
+  mu0_rate = 0.35, # intercept (natural scale): baseline daily seizure rate = 0.35 seizures/day; over 28 days                      #it's about 10 seizures
+  days0 = 28,
+  days1 = 28,
+  theta = 3.0,      # NB dispersion: smaller = more overdispersion
+  sd_u = 0.6,
+  pool_mult = 10 # generate ~6*n candidates; increase if eligibility is strict
+) {
+  Npool <- pool_mult * n
+  
+  # Baseline covariates + latent severity (pre-randomization)
+  age   <- rnorm(Npool, mean = 40, sd = 12)
+  age_z <- (age - mean(age)) / 10
+  u     <- rnorm(Npool, mean = 0, sd = sd_u) #incorporates random subject effects to allow patients differ multiplicatively in their seizure rate. without u, every patient with the same age is assumed to have the same expected seizure rate - which is unrealistic (note larger sd_u -> more heterogeneity -> bigger precision gain by adjusting for baseline)
+
+  # Baseline counts
+  log_lambda0 <- log(mu0_rate) + beta_age * age_z + u
+  mu_base     <- exp(log_lambda0) * days0
+  base      <- rnbinom(Npool, size = theta, mu = mu_base)
+
+  cand <- tibble(age, age_z, u, base) |>
+    filter(base >= min_base)
+
+  if (nrow(cand) < n) {
+    stop("Not enough eligible patients in pool. Increase pool_mult or raise mu0_rate / sd_u.")
+  }
+
+  # Sample n eligible patients
+  dat <- cand |> slice_sample(n = n)
+
+  # Randomize after eligibility is applied
+  dat <- dat |>
+    mutate(
+      trt = rbinom(n(), 1, 0.5),
+      days_post = days1,
+      lbase = log(base),
+    )
+
+  # Post-randomization counts
+  log_lambda1 <- log(mu0_rate) + beta_age * dat$age_z + dat$u + log(rr_trt) * dat$trt
+  mu_post     <- exp(log_lambda1) * days1
+  dat$y_post  <- rnbinom(n, size = theta, mu = mu_post)
+
+  dat |> select(y_post, base, lbase, 
+                trt, age, age_z, days_post)
+}
+
+
+# set.seed(123)
+# 
+# dat_list <- lapply(1:10, function(i) {
+#   sim_one_trial(
+#     n = 200,
+#     rr_trt = 0.80,
+#     beta_age = 0.25,
+#     min_base = 4
+#   )
+# })
+```
+
+
+
+## Three analyses: unadjusted vs baseline-adjusted vs baseline + age
+
+For count outcomes, we use a log-link negative binomial model for the mean seizure rate, with follow-up time included as an offset.
+
+-   **Unadjusted**: `y_post ~ trt + offset(log(days_post))`
+
+    This treats all within-arm heterogeneity as residual noise.
+
+<!-- -->
+
+-   **Adjusted for baseline**: `y_post ~ trt + base + offset(log(days_post))`
+
+    Because baseline and follow-up share the same latent severity, this adjustment removes persistent between-patient heterogeneity and should substantially improve precision.
+
+-   **Adjusted for baseline and age**: `y_post ~ trt + base + age + offset(log(days_post))`
+
+    Age modestly shifts the underlying log-rate in the data-generating process. Even if its association is weak, it may still explain some residual variability and provide incremental precision gains.
+
+Across repeated simulated trials, we compare:
+
+-   **SE** of the estimated log rate ratio
+
+-   The implied **variance reduction**
+
+-   **Power** (two-sided α = 0.05)
+
+
+
+```{r}
+fit_models <- function(dat) {
+
+  m0 <- MASS::glm.nb(y_post ~ trt + offset(log(days_post)), data = dat)
+  m1 <- MASS::glm.nb(y_post ~ trt + lbase + offset(log(days_post)), data = dat)
+  m2 <- MASS::glm.nb(y_post ~ trt + lbase + age_z + offset(log(days_post)), data = dat)
+
+  extract <- function(m) {
+    s <- coef(summary(m))
+    c(
+      est = s["trt", "Estimate"],
+      se  = s["trt", "Std. Error"],
+      p   = s["trt", "Pr(>|z|)"]
+    )
+  }
+
+  t0 <- extract(m0)
+  t1 <- extract(m1)
+  t2 <- extract(m2)
+
+  tibble::tibble(
+    log_rr_unadj = t0["est"], se_unadj = t0["se"], p_unadj = t0["p"],
+    log_rr_adj_base = t1["est"], se_adj_base = t1["se"], p_adj_base = t1["p"],
+    log_rr_adj_base_age = t2["est"], se_adj_base_age = t2["se"], p_adj_base_age = t2["p"]
+  )
+}
+
+# set.seed(123)
+# dat <- sim_one_trial(n = 200, rr_trt = 0.80, beta_age = 0.25, min_base = 4)
+# fit_models(dat)
+# names(fit_models(dat))
+
+#m0 <- MASS::glm.nb(y_post ~ trt + offset(log(days_post)), data = dat);summary(m0)
+#m1 <- MASS::glm.nb(y_post ~ trt + lbase + offset(log(days_post)), data = dat);summary(m1)
+#m2 <- MASS::glm.nb(y_post ~ trt + lbase + age_z + offset(log(days_post)), data = dat);summary(m2)
+```
+
+```{r}
+#| eval: false
+
+#Debugging code to check on model convergence and warnings
+run_sims_debug <- function(nsim = 10, n = 200, ...) {
+
+  fit_one <- function(formula, dat, maxit = 200) {
+    warn_msgs <- character(0)
+
+    mod <- withCallingHandlers(
+      tryCatch(
+        MASS::glm.nb(
+          formula,
+          data = dat,
+          control = glm.control(maxit = maxit)
+        ),
+        error = function(e) e
+      ),
+      warning = function(w) {
+        warn_msgs <<- c(warn_msgs, conditionMessage(w))
+        invokeRestart("muffleWarning")
+      }
+    )
+
+    list(
+      model = mod,
+      error = inherits(mod, "error"),
+      converged = if (!inherits(mod, "error")) isTRUE(mod$converged) else NA,
+      warned = length(warn_msgs) > 0,
+      warn_msgs = unique(warn_msgs),
+      iter = if (!inherits(mod, "error")) mod$iter else NA,
+      theta = if (!inherits(mod, "error")) mod$theta else NA,
+      boundary = if (!inherits(mod, "error")) isTRUE(mod$boundary) else NA
+    )
+  }
+
+  out <- vector("list", nsim)
+
+  for (i in seq_len(nsim)) {
+
+    dat <- sim_one_trial(n = n, ...)
+
+    # (Optional but recommended) stabilize baseline covariate numerically
+    # Comment out if you don't want it:
+    #dat <- dat |>
+      #dplyr::mutate(lbase_z = as.numeric(scale(lbase)))
+
+    m0 <- fit_one(y_post ~ trt + offset(log(days_post)), dat)
+    m1 <- fit_one(y_post ~ trt + lbase + offset(log(days_post)), dat)
+    m2 <- fit_one(y_post ~ trt + lbase + age_z + offset(log(days_post)), dat)
+
+    out[[i]] <- list(
+      sim = i,
+      data = dat,
+      unadj = m0,
+      adj_base = m1,
+      adj_base_age = m2
+    )
+  }
+
+  out
+}
+dbg <- run_sims_debug(nsim = 1000, n = 200, rr_trt = 0.80, beta_age = 0.25, min_base = 4)
+summ_dbg <- tibble(
+  sim = seq_along(dbg),
+
+  conv_unadj = sapply(dbg, function(x) x$unadj$converged),
+  conv_adj_base = sapply(dbg, function(x) x$adj_base$converged),
+  conv_adj_base_age = sapply(dbg, function(x) x$adj_base_age$converged),
+
+  warn_unadj = sapply(dbg, function(x) x$unadj$warned),
+  warn_adj_base = sapply(dbg, function(x) x$adj_base$warned),
+  warn_adj_base_age = sapply(dbg, function(x) x$adj_base_age$warned),
+
+  err_unadj = sapply(dbg, function(x) x$unadj$error),
+  err_adj_base = sapply(dbg, function(x) x$adj_base$error),
+  err_adj_base_age = sapply(dbg, function(x) x$adj_base_age$error)
+)
+
+View(summ_dbg)
+```
+
+
+
+## Main experiment: the only difference is “do we explain heterogeneity?”
+
+Let’s run many trials and compare unadjusted vs adjusted.
+
+
+
+```{r}
+run_sims <- function(nsim = 2000, n = 200, ...) {
+
+  res_list <- vector("list", nsim)
+
+  for (i in seq_len(nsim)) {
+    dat <- sim_one_trial(n = n, ...)
+    fm <- fit_models(dat)
+
+    # HARD checks
+    if (!is.data.frame(fm)) {
+      stop(paste0("fit_models did not return a data.frame at sim ", i,
+                  ". It returned: ", paste(class(fm), collapse = ", ")))
+    }
+    if (!("p_unadj" %in% names(fm))) {
+      stop(paste0("p_unadj missing at sim ", i,
+                  ". Returned columns: ", paste(names(fm), collapse = ", ")))
+    }
+
+    res_list[[i]] <- fm
+  }
+
+  res <- dplyr::bind_rows(res_list)
+
+  # sanity check before mutate
+  stopifnot("p_unadj" %in% names(res))
+
+  res <- res |>
+    dplyr::mutate(
+      sig_unadj = p_unadj < 0.05,
+      sig_adj_base = p_adj_base < 0.05,
+      sig_adj_base_age = p_adj_base_age < 0.05
+    )
+
+  res
+}
+
+res <- run_sims(nsim = 1000, n = 200, rr_trt = 0.80, beta_age = 0.25, min_base = 4)
+
+
+
+
+# set.seed(123)
+# 
+# bad <- NULL
+# 
+# for (i in 1:1000) {
+# 
+#   dat <- sim_one_trial(n = 200, rr_trt = 0.80, beta_age = 0.25, min_base = 4)
+# 
+#   # quick sanity checks on the variables used in the model
+#   if (anyNA(dat$lbase) || any(!is.finite(dat$lbase))) {
+#     bad <- list(i = i, dat = dat, reason = "lbase has NA/Inf")
+#     break
+#   }
+#   if (anyNA(dat$days_post) || any(!is.finite(dat$days_post)) || any(dat$days_post <= 0)) {
+#     bad <- list(i = i, dat = dat, reason = "days_post bad (<=0/NA/Inf)")
+#     break
+#   }
+# 
+#   # try fitting the model and catch the exact error
+#   ok <- tryCatch({
+#     m1 <- MASS::glm.nb(y_post ~ trt + lbase + offset(log(days_post)), data = dat)
+#     TRUE
+#   }, error = function(e) {
+#     bad <<- list(i = i, dat = dat, reason = paste("glm.nb error:", conditionMessage(e)))
+#     FALSE
+#   })
+# 
+#   if (!ok) break
+# }
+# 
+# bad$i
+# bad$reason
+# 
+# # Save the dataset so you can inspect it later
+# saveRDS(bad$dat, file = "bad_dat.rds")
+# 
+# dat_bad <- readRDS("bad_dat.rds")
+# 
+# summary(dat_bad$base)
+# summary(dat_bad$lbase)
+# summary(dat_bad$days_post)
+# 
+# any(!is.finite(dat_bad$lbase))
+# any(!is.finite(log(dat_bad$days_post)))
+
+
+```
+
+
+
+## Precision comparison
+
+
+
+```{r}
+summary_precision <- res |>
+  summarise(
+    mean_se_unadj = mean(se_unadj),
+    mean_se_adj_base = mean(se_adj_base),
+    mean_se_adj_base_age = mean(se_adj_base_age),
+    se_ratio_base = mean(se_adj_base) / mean(se_unadj),
+    se_ratio_base_age = mean(se_adj_base_age) / mean(se_unadj),
+  )
+
+summary_precision
+
+```
+
+
+
+The table above compares the **standard error (SE)** of the estimated log rate ratio across models. Recall that the SE reflects how much the estimated treatment effect would vary across repeated realizations of the same trial. Smaller SE means greater precision.
+
+From the simulation results above:
+
+-   Mean SE (unadjusted): `r round(mean(res$se_unadj), 3)`
+
+-   Mean SE (adjusted for baseline): `r round(mean(res$se_adj_base), 3)`
+
+-   Mean SE (adjusted for baseline + age): `r round(mean(res$se_adj_base_age), 3)`
+
+This corresponds to:
+
+-   SE ratio (baseline / unadjusted):\
+
+    `r round(mean(res$se_adj_base) / mean(res$se_unadj), 3)`
+
+-   SE ratio (baseline + age / unadjusted):\
+
+    `r round(mean(res$se_adj_base_age) / mean(res$se_unadj), 3)`
+
+What this means
+
+-   Adjusting for **baseline seizure frequency** reduced the standard error by approximately\
+
+    `r round(100 * (1 - mean(res$se_adj_base) / mean(res$se_unadj)), 1)`%.
+
+-   Adding **age on top of baseline** reduced the standard error by approximately\
+
+    `r round(100 * (1 - mean(res$se_adj_base_age) / mean(res$se_unadj)), 1)`%.
+
+Because variance equals SE², the implied variance reduction from baseline adjustment is approximately:
+
+$$
+\text{Variance reduction}
+=
+1 - \left(\frac{SE_{\text{adj}}}{SE_{\text{unadj}}}\right)^2
+$$
+
+which in this simulation is about
+
+`r round(100 * (1 - (mean(res$se_adj_base) / mean(res$se_unadj))^2), 1)`%.
+
+## Interpretation
+
+-   The **treatment effect estimate itself is unchanged** (as expected under randomization).
+
+-   What changes is the **precision** of that estimate.
+
+-   Baseline seizure frequency removes a substantial amount of within-arm heterogeneity.
+
+-   Age provides a smaller additional improvement, consistent with it explaining a modest fraction of outcome variability.
+
+## Power comparison
+
+
+
+```{r}
+summary_power <- res |>
+  summarise(
+    power_unadj = mean(sig_unadj),
+    power_adj_base = mean(sig_adj_base),
+    power_adj_base_age = mean(sig_adj_base_age)
+  )
+
+summary_power
+
+```
+
+
+
+Even a `r round(100 * (1 - mean(res$se_adj_base) / mean(res$se_unadj)), 1)`% reduction in SE can meaningfully increase power, because test statistics scale roughly as:
+
+Near conventional power thresholds, that magnitude of SE reduction can translate into noticeable gains in statistical power — or equivalently, a nontrivial reduction in required sample size.
+
+## Visualize the SE shift
+
+
+
+```{r}
+res_long <- res |>
+  select(se_unadj, se_adj_base, se_adj_base_age) |>
+  pivot_longer(everything(), names_to = "model", values_to = "se") |>
+  mutate(model = recode(model,
+                        se_unadj = "Unadjusted",
+                        se_adj_base = "Adjusted: baseline",
+                        se_adj_base_age = "Adjusted: baseline + age"))
+
+ggplot(res_long, aes(x = se, fill = model)) +
+  geom_histogram(bins = 40, position = "identity", alpha = 0.4) +
+  labs(x = "SE of log(rate ratio) for treatment", y = "Trials", fill = "Model")
+
+
+```
+
+
+
+## What if age is *barely* related—or truly unrelated?
+
+This is often the real concern: “you’re adding a covariate that’s not predictive.”
+
+Let’s sweep `beta_age` from 0 (no relationship) to modest values.
+
+
+
+```{r}
+beta_grid <- c(0.00, 0.05, 0.10, 0.20, 0.30)
+
+sweep_age <- lapply(beta_grid, function(b) {
+  r <- run_sims(nsim = 1000, n = 200, rr_trt = 0.80, beta_age = b, min_base = 4)
+  tibble(
+    beta_age = b,
+    se_ratio_base = mean(r$se_adj_base) / mean(r$se_unadj),
+    se_ratio_base_age = mean(r$se_adj_base_age) / mean(r$se_unadj),
+    power_unadj = mean(r$sig_unadj),
+    power_adj_base = mean(r$sig_adj_base),
+    power_adj_base_age = mean(r$sig_adj_base_age)
+  )
+}) |>
+  bind_rows()
+
+sweep_age
+
+ggplot(sweep_age, aes(x = beta_age)) +
+  geom_hline(yintercept = 1, linetype = "dashed") +
+  geom_line(aes(y = se_ratio_base, color = "Adjusted: base")) +
+  geom_point(aes(y = se_ratio_base, color = "Adjusted: base")) +
+  geom_line(aes(y = se_ratio_base_age, color = "Adjusted: base + age")) +
+  geom_point(aes(y = se_ratio_base_age, color = "Adjusted: base + age")) +
+  labs(
+    x = "Age association strength (beta_age)",
+    y = "SE ratio (Adjusted / Unadjusted)",
+    color = NULL
+  )
+
+ggplot(sweep_age, aes(x = beta_age)) +
+  geom_line(aes(y = power_unadj, color = "Unadjusted")) +
+  geom_point(aes(y = power_unadj, color = "Unadjusted")) +
+  geom_line(aes(y = power_adj_base, color = "Adjusted: base")) +
+  geom_point(aes(y = power_adj_base, color = "Adjusted: base")) +
+  geom_line(aes(y = power_adj_base_age, color = "Adjusted: base + age")) +
+  geom_point(aes(y = power_adj_base_age, color = "Adjusted: base + age")) +
+  labs(
+    x = "Age association strength (beta_age)",
+    y = "Power (two-sided alpha=0.05)",
+    color = NULL
+  )
+
+```
+
+
+
+Let’s sweep `sd_u` to show why baseline adjustment helps.
+
+
+
+```{r}
+sd_grid <- c(0.0, 0.2, 0.4, 0.6, 0.8)
+
+sweep_u <- lapply(sd_grid, function(sdu) {
+  r <- run_sims(nsim = 1000, n = 200, rr_trt = 0.80,
+               beta_age = 0.10, sd_u = sdu, min_base = 4)
+  tibble(
+    sd_u = sdu,
+    se_ratio_base = mean(r$se_adj_base) / mean(r$se_unadj),
+    power_unadj = mean(r$sig_unadj),
+    power_adj_base = mean(r$sig_adj_base)
+  )
+}) |>
+  bind_rows()
+
+sweep_u
+
+ggplot(sweep_u, aes(x = sd_u)) +
+  geom_line(aes(y = se_ratio_base)) +
+  geom_point(aes(y = se_ratio_base)) +
+  labs(x = "Between-patient log-rate heterogeneity (sd_u)", y = "SE ratio (baseline adjusted / unadjusted)")
+
+ggplot(sweep_u, aes(x = sd_u)) +
+  geom_line(aes(y = power_unadj)) +
+  geom_point(aes(y = power_unadj)) +
+  geom_line(aes(y = power_adj_base)) +
+  geom_point(aes(y = power_adj_base)) +
+  labs(x = "Between-patient log-rate heterogeneity (sd_u)", y = "Power")
+```
+
+
+
+## Interpretation you can use with clinicians:
+
+-   When `beta_age = 0`, adjustment doesn’t magically create power (and typically doesn’t ruin it either).
+
+-   As soon as age explains even a little variability, **SE drops** and **power rises**.
+
+-   The benefit is not “age predicts seizures” in a mechanistic sense; it’s “age soaks up heterogeneity we’d otherwise treat as noise.”
+
+## “But what if the age effect differs by treatment arm?”
+
+Good question—and it’s a *different* question than “should we adjust.”
+
+-   **Covariate adjustment** (main effect of age) is about precision
+
+-   **Treatment-by-age interaction** is about effect modification.
+
+If you’re worried about effect modification, you can explore it (preferably pre-specified, and interpreted carefully). But you don’t need an interaction term for age to be useful for precision.
+
+Here’s how you’d fit both:
+
+
+
+```{r}
+# dat_example <- sim_one_trial(n = 200, rr_trt = 0.80, beta_age = 0.25)
+# 
+# m_main <- MASS::glm.nb(y ~ trt + age_z, data = dat_example)
+# m_int  <- MASS::glm.nb(y ~ trt * age_z, data = dat_example)
+# 
+# summary(m_main)$coefficients["trt", ]
+# summary(m_int)$coefficients["trt", ]
+
+
+set.seed(123)
+
+dat <- sim_one_trial(
+  n = 200,
+  min_base = 4,
+  rr_trt = 0.80,
+  mu0_rate = 0.35,
+  days0 = 28,
+  days1 = 28,
+  theta = 3,      # slightly more stable than 1.0
+  sd_u = 0.6,       # moderate heterogeneity
+  beta_age = 0.25,
+)
+m <- MASS::glm.nb(y_post ~ trt + base + age_z + offset(log(days_post)), data = dat)
+summary(m)
+```
+
+
+
+## Takeaway
+
+We adjust for age not because we believe age is *the* driver of seizures, but because baseline covariates often explain meaningful within-arm heterogeneity. In a randomized trial, explaining heterogeneity improves precision of the treatment effect estimate and increases power without biasing the effect.
+

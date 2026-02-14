@@ -7,11 +7,11 @@ subtitle: "A small simulation showing the information loss from categorizing pre
 categories: [regression, modelling, simulation]
 ---
 
-Many applied papers still dichotomize continuous predictors. This feels simple. It is not harmless.
+Many trial analyses still dichotomize continuous predictors. This feels simple. It is not harmless.
 
 Let’s simulate a clean linear relationship and see what happens.
 
-## Simulation Setup
+## Simulation setup
 
 ```{r}
 #| message: false
@@ -26,7 +26,7 @@ y <- 2*x + rnorm(n)
 d <- data.frame(x, y)
 ```
 
-## Correct Model (Continuous Predictor)
+## Correct model using a continuous predictor
 
 ```{r}
 #| code-fold: true
@@ -34,7 +34,7 @@ fit_cont <- lm(y ~ x, data = d)
 summary(fit_cont)
 ```
 
-## Model Using a Dichotomized Predictor
+## Model using a dichotomized predictor
 
 ```{r}
 #| code-fold: true

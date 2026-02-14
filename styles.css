@@ -83,4 +83,13 @@ h1 {
   text-decoration: underline;
 }
 
+/* Increase main text contrast */
+body {
+  color: #111111;   /* Near-black, easier on eyes than pure #000 */
+}
 
+/* Increase contrast for margin notes */
+.margin-sidebar {
+  color: #1a1a1a;
+  font-size: 0.9rem;
+}

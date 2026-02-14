@@ -1,0 +1,210 @@
+---
+title: "Why Block Size Should Not Appear in the Protocol or SAP"
+author: Fei Zuo
+date: 2026-02-13
+#date-modified: 2026-02-11
+subtitle: "Allocation concealment is not the same as blinding — and publishing block size can compromise the integrity of randomization."
+categories: [trial design, randomization]
+---
+
+In randomized trials, we talk a lot about blinding. But an equally important and subtly different concept is **allocation concealment**.
+
+They are not the same thing.
+
+-   **Blinding** protects against bias *after* treatment is assigned (e.g., biased outcome assessment).
+
+-   **Allocation concealment** protects against bias at the moment of enrollment *before* treatment is assigned.
+
+And this is exactly where **block size** becomes dangerous.
+
+## Regulatory and Reporting Standards Emphasize Concealment — Not Disclosure of Block Size
+
+Major regulatory and reporting guidance documents are clear about the importance of allocation concealment — but notably **do not require disclosure of block size in protocols or SAPs**.
+
+**ICH E9 (Statistical Principles for Clinical Trials)**
+
+ICH E9 states:
+
+> “The method of randomisation should ensure that treatment allocation is unpredictable.”
+
+Unpredictability is the core principle. If the block size is known to investigators, predictability can arise — directly conflicting with this requirement.
+
+**ICH E6 (Good Clinical Practice)**
+
+ICH E6 emphasizes safeguarding the randomization process:
+
+> “The investigator should ensure that the randomization procedures are followed and that the code is broken only in accordance with the protocol.”
+
+Maintaining control of the randomization schedule — including operational details like block size — is part of preserving its integrity.
+
+**CONSORT 2010 Statement**
+
+CONSORT distinguishes clearly between:
+
+-   **Sequence generation**
+
+-   **Allocation concealment mechanism**
+
+Item 9 of the CONSORT 2010 checklist requires:
+
+> “Mechanism used to implement the random allocation sequence (such as sequentially numbered containers), describing any steps taken to conceal the sequence until interventions were assigned.”
+
+Importantly, CONSORT focuses on *how concealment was ensured*, not on revealing details that would undermine it.
+
+## The Purpose of Block Randomization
+
+Block randomization is used to maintain approximate treatment balance throughout enrollment.
+
+For example, in a 1:1 trial with block size 4, each block contains:
+
+-   2 assignments to Treatment A
+
+-   2 assignments to Treatment B
+
+The order within the block is randomized. This helps prevent large imbalances if enrollment stops early.
+
+## The Problem: Predictability
+
+If investigators know the block size, allocation can become **predictable**.
+
+Imagine:
+
+-   1:1 randomization
+
+-   Block size = 4
+
+-   Three patients in a block have already been assigned: A, B, A
+
+What is the fourth assignment?
+
+It must be B.
+
+At that point, allocation is no longer random in practice — it is deducible.
+
+The mere ability to anticipate the next assignment can influence enrollment decisions in small but systematic ways:
+
+-   Delaying enrollment of a "difficult" patient
+
+-   Accelerating enrollment of a "good prognosis" patient
+
+-   Selectively enrolling borderline-eligible patients
+
+This introduces **selection bias**, even in a formally randomized trial. That is a failure of allocation concealment.
+
+## Allocation Concealment ≠ Blinding
+
+Even in an open-label trial (no blinding), allocation concealment must still be protected.
+
+Blinding protects:
+
+-   Outcome assessment
+
+-   Patient behavior
+
+-   Investigator expectations
+
+Allocation concealment protects:
+
+-   **The integrity of who gets assigned what**
+
+You can have:
+
+-   A blinded trial with broken allocation concealment
+
+-   An open-label trial with perfect allocation concealment
+
+They are conceptually distinct safeguards.
+
+## Why Block Size Does Not Belong in the Protocol or SAP
+
+The protocol and SAP are often widely distributed:
+
+-   Investigators
+
+-   Coordinators
+
+-   Sponsors
+
+-   Regulators
+
+-   Data monitoring committees
+
+If the block size is written there, it is no longer protected.
+
+Even stating: ""Randomization will use permuted blocks of size 4" is enough to compromise concealment.
+
+Best practice is:
+
+-   The protocol states that blocked randomization will be used.
+
+-   The SAP describes the randomization method in general terms.
+
+-   The **actual block size (and any random variation in block size)** is known only to:
+
+    -   The unblinded statistician
+
+    -   The randomization unit/vendor/system
+
+This protects allocation concealment while still maintaining transparency about the design.
+
+## Fixed Block Sizes
+
+Using a fixed block size makes predictability easier.
+
+A better approach is:
+
+-   Randomly varying block sizes (e.g., 2 and 4)
+
+This dramatically reduces predictability. But even then, disclosing the possible block sizes weakens protection.
+
+## The Statistical Consequences of Broken Allocation Concealment
+
+Empirical evidence shows that trials with inadequate allocation concealment:
+
+-   Overestimate treatment effects
+
+-   Exhibit exaggerated efficacy signals
+
+-   Show increased selection bias
+
+This is not theoretical. Allocation concealment is one of the strongest methodological predictors of unbiased treatment effect estimates.
+
+## What the Protocol *Should* Say
+
+Instead of specifying block size, a protocol can say:
+
+> Participants will be randomized in a 1:1 ratio using a centralized, computer-generated permuted block randomization schedule. Details of the randomization sequence will be maintained by the unblinded statistician to ensure allocation concealment.
+
+That is sufficient. Regulators do not require disclosure of block size in public-facing documents.
+
+## Takeaway
+
+-   Block size is an operational detail — not a scientific one.
+
+-   Its disclosure does not improve reproducibility, transparency, or statistical validity. But it can undermine allocation concealment.
+
+-   And once allocation concealment is compromised, the trial is vulnerable to selection bias even if it remains fully blinded.
+
+-   Protecting allocation concealment is protecting the integrity of randomization itself.
+
+-   Block size belongs with the unblinded randomization statistician/unit and nowhere else.
+
+-   Regulators do not require disclosure of block size in public-facing documents.
+
+------------------------------------------------------------------------
+
+## References
+
+1.  International Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use (ICH). **ICH E9: Statistical Principles for Clinical Trials.** 1998. Addendum (R1) on Estimands and Sensitivity Analysis in Clinical Trials. 2019.
+
+2.  International Council for Harmonisation (ICH). **ICH E6 (R2): Good Clinical Practice.** 2016.
+
+3.  Schulz KF, Altman DG, Moher D; for the CONSORT Group. **CONSORT 2010 Statement: Updated guidelines for reporting parallel group randomized trials.** *BMJ.* 2010;340:c332.
+
+4.  Schulz KF, Chalmers I, Hayes RJ, Altman DG. **Empirical evidence of bias: Dimensions of methodological quality associated with estimates of treatment effects in controlled trials.** *JAMA.* 1995;273(5):408–412.
+
+5.  Schulz KF, Grimes DA. **Allocation concealment in randomised trials: Defending against deciphering.** *Lancet.* 2002;359(9306):614–618.
+
+6.  Moher D, Pham B, Jones A, et al. **Does quality of reports of randomised trials affect estimates of intervention efficacy reported in meta-analyses?** *Lancet.* 1998;352(9128):609–613.
+
+7.  Savović J, Jones HE, Altman DG, et al. **Influence of reported study design characteristics on intervention effect estimates from randomized, controlled trials: Combined analysis of meta-epidemiological studies.** *Cochrane Database Syst Rev.* 2012;(3):MR000012.

@@ -1,10 +1,9 @@
 ---
-title: "Trial-Notes"
-subtitle: "Epilepsy Clinical Trial Design and Analysis"
+title: "Posts"
 listing:
   contents: posts/*/index.qmd
   sort: "date desc"
-  page-size: 10
+  page-size: 20
   fields: [date, title, subtitle, description, categories, reading-time]
   feed: true
 ---

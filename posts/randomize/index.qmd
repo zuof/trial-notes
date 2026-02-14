@@ -5,13 +5,14 @@ date: 2026-02-11
 #date-modified: 2026-02-11
 subtitle: "A small simulation showing the information loss from categorizing predictors."
 categories: [regression, modelling, simulation]
+draft: true
 ---
 
-Many applied papers still dichotomize continuous predictors. This feels simple. It is not harmless.
+Many trial analyses still dichotomize continuous predictors. This feels simple. It is not harmless.
 
 Let’s simulate a clean linear relationship and see what happens.
 
-## Simulation Setup
+## Simulation setup
 
 ```{r}
 #| message: false
@@ -26,7 +27,7 @@ y <- 2*x + rnorm(n)
 d <- data.frame(x, y)
 ```
 
-## Correct Model (Continuous Predictor)
+## Correct model using a continuous predictor
 
 ```{r}
 #| code-fold: true
@@ -34,7 +35,7 @@ fit_cont <- lm(y ~ x, data = d)
 summary(fit_cont)
 ```
 
-## Dichotomized Model
+## Model using a dichotomized predictor
 
 ```{r}
 #| code-fold: true
@@ -54,7 +55,7 @@ summary(fit_cont)$r.squared
 summary(fit_cat)$r.squared
 ```
 
-The dichotomized model throws away information. The estimated relationship becomes less precise and less powerful.
+The model using a dichotomized predictor throws away information. The estimated relationship becomes less precise and less powerful.
 
 ## Takeaway
 

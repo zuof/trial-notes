@@ -3,19 +3,40 @@ project:
 
 website:
   title: "trial-notes"
+  site-url: "https://zuof.github.io/trial-notes/"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
-  
+      - href: about.qmd
+        text: About
+      - href: Posts.qmd
+        text: Posts
+
 format:
   html:
+    grid:
+      margin-width: 250px
     theme: cosmo
     toc: true
     code-fold: true
     css: styles.css
     date-format: "MMMM D, YYYY"
 
+# format:
+#   html:
+#     grid:
+#       margin-width: 250px
+#     theme: litera
+#     mainfont: "Inter"
+#     monofont: "JetBrains Mono"
+#     fontsize: 17px
+#     linestretch: 1.6
+#     highlight-style: github
+#     toc: true
+#     toc-depth: 3
+#     smooth-scroll: true
+#     css: styles.css
+#     date-format: "MMMM D, YYYY"
+    
 editor: visual
-

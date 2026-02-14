@@ -1,61 +1,47 @@
 ---
-title: "Why Dichotomizing Continuous Variables Is a Mistake"
+title: "Why Adjust for Covariates"
 author: Fei Zuo
-date: 2026-02-11
+date: 2026-02-12
 #date-modified: 2026-02-11
-subtitle: "A small simulation showing the information loss from categorizing predictors."
-categories: [regression, modelling, simulation]
+categories: [covariate adjustment, simulation]
 ---
 
-Many applied papers still dichotomize continuous predictors. This feels simple. It is not harmless.
+## The clinician question (and the key misunderstanding)
 
-Let’s simulate a clean linear relationship and see what happens.
+A common objection I hear is: “It makes no sense to adjust for patient age in seizure analyses: age isn’t known to predict seizures in this population.”
 
-## Simulation Setup
+This mixes up two different goals:
 
-```{r}
-#| message: false
-#| warning: false
+-   **Causal/Scientific explanation** (“does age cause seizures?”)
 
-set.seed(1)
+-   **Precision in estimating a randomized treatment effect** (“can age explain outcome variability within arms?”)
 
-n <- 500
-x <- rnorm(n)
-y <- 2*x + rnorm(n)
+In a randomized trial, covariate adjustment uses *baseline information* to explain some of the outcome heterogeneity that would otherwise sit in the residual error term. Less residual noise → **smaller standard error** → **more power**, for the *same* sample size.
 
-d <- data.frame(x, y)
-```
+Even if a covariate is only a **weak** predictor, it can still help. And importantly:
 
-## Correct Model (Continuous Predictor)
+-   If the covariate is truly unrelated to the outcome, adjustment usually costs little (you may lose a hair of precision, but often negligible), while
 
-```{r}
-#| code-fold: true
-fit_cont <- lm(y ~ x, data = d)
-summary(fit_cont)
-```
+-   If it explains even modest variability, gains can be meaningful.
 
-## Model Using a Dichotomized Predictor
+## A simple “why it works”  
 
-```{r}
-#| code-fold: true
+For many common estimators (e.g., ANCOVA-type adjustment in linear models), a rough rule of thumb is:
+$$
+\mathrm{Var}(\hat{\Delta}_{\text{adj}})
+\approx
+(1 - R^2)\,
+\mathrm{Var}(\hat{\Delta}_{\text{unadj}})
+$$
 
-d$x_cat <- ifelse(d$x > median(d$x), 1, 0)
+where R^2 is the proportion of outcome variability explained by baseline covariates *within arms*.
 
-fit_cat <- lm(y ~ x_cat, data = d)
-summary(fit_cat)
-```
+So if baseline covariates explain even **10%** of the variability (R^2=0.10), you can get about a **10% variance reduction**, i.e. about a **5% SE reduction**. That can matter a lot for borderline-powered trials.
 
-## Comparing R-squared
+## Simulation setup: seizure counts with heterogeneous baseline risk
 
-```{r}
-#| code-fold: true
+We’ll simulate a parallel-group trial with a seizure-count outcome. The true treatment effect is a constant rate ratio (no treatment-by-age interaction). Age affects baseline seizure rate modestly—*not because we claim it’s causal*, but because it captures real-world heterogeneity (disease duration, comorbidities, adherence patterns, etiologic mix, etc.) that differs across individuals.
 
-summary(fit_cont)$r.squared
-summary(fit_cat)$r.squared
-```
+library(dplyr) library(ggplot2)
 
-The model using a dichotomized predictor throws away information. The estimated relationship becomes less precise and less powerful.
-
-## Takeaway
-
-Categorizing a continuous predictor reduces statistical efficiency and can distort inference. Unless there is a compelling clinical or decision-based reason, keep predictors continuous.
+set.seed(20260212)
