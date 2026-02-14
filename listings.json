@@ -2,12 +2,14 @@
   {
     "listing": "/Posts.html",
     "items": [
+      "/posts/block/index.html",
       "/posts/dichotomize/index.html"
     ]
   },
   {
     "listing": "/index.html",
     "items": [
+      "/posts/block/index.html",
       "/posts/dichotomize/index.html"
     ]
   }

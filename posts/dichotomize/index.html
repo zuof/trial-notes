@@ -152,9 +152,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#simulation-setup" id="toc-simulation-setup" class="nav-link active" data-scroll-target="#simulation-setup">Simulation Setup</a></li>
-  <li><a href="#correct-model-continuous-predictor" id="toc-correct-model-continuous-predictor" class="nav-link" data-scroll-target="#correct-model-continuous-predictor">Correct Model (Continuous Predictor)</a></li>
-  <li><a href="#model-using-a-dichotomized-predictor" id="toc-model-using-a-dichotomized-predictor" class="nav-link" data-scroll-target="#model-using-a-dichotomized-predictor">Model Using a Dichotomized Predictor</a></li>
+  <li><a href="#simulation-setup" id="toc-simulation-setup" class="nav-link active" data-scroll-target="#simulation-setup">Simulation setup</a></li>
+  <li><a href="#correct-model-using-a-continuous-predictor" id="toc-correct-model-using-a-continuous-predictor" class="nav-link" data-scroll-target="#correct-model-using-a-continuous-predictor">Correct model using a continuous predictor</a></li>
+  <li><a href="#model-using-a-dichotomized-predictor" id="toc-model-using-a-dichotomized-predictor" class="nav-link" data-scroll-target="#model-using-a-dichotomized-predictor">Model using a dichotomized predictor</a></li>
   <li><a href="#comparing-r-squared" id="toc-comparing-r-squared" class="nav-link" data-scroll-target="#comparing-r-squared">Comparing R-squared</a></li>
   <li><a href="#takeaway" id="toc-takeaway" class="nav-link" data-scroll-target="#takeaway">Takeaway</a></li>
   </ul>
@@ -200,10 +200,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Many applied papers still dichotomize continuous predictors. This feels simple. It is not harmless.</p>
+<p>Many trial analyses still dichotomize continuous predictors. This feels simple. It is not harmless.</p>
 <p>Let’s simulate a clean linear relationship and see what happens.</p>
 <section id="simulation-setup" class="level2">
-<h2 class="anchored" data-anchor-id="simulation-setup">Simulation Setup</h2>
+<h2 class="anchored" data-anchor-id="simulation-setup">Simulation setup</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -217,8 +217,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="correct-model-continuous-predictor" class="level2">
-<h2 class="anchored" data-anchor-id="correct-model-continuous-predictor">Correct Model (Continuous Predictor)</h2>
+<section id="correct-model-using-a-continuous-predictor" class="level2">
+<h2 class="anchored" data-anchor-id="correct-model-using-a-continuous-predictor">Correct model using a continuous predictor</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -248,7 +248,7 @@ F-statistic:  1750 on 1 and 498 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </section>
 <section id="model-using-a-dichotomized-predictor" class="level2">
-<h2 class="anchored" data-anchor-id="model-using-a-dichotomized-predictor">Model Using a Dichotomized Predictor</h2>
+<h2 class="anchored" data-anchor-id="model-using-a-dichotomized-predictor">Model using a dichotomized predictor</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>

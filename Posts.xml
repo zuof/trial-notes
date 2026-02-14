@@ -10,7 +10,184 @@
 <atom:link href="https://zuof.github.io/trial-notes/Posts.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Wed, 11 Feb 2026 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 13 Feb 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Why Block Size Should Not Appear in the Protocol or SAP</title>
+  <dc:creator>Fei Zuo</dc:creator>
+  <link>https://zuof.github.io/trial-notes/posts/block/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>In randomized trials, we talk a lot about blinding. But an equally important and subtly different concept is <strong>allocation concealment</strong>.</p>
+<p>They are not the same thing.</p>
+<ul>
+<li><p><strong>Blinding</strong> protects against bias <em>after</em> treatment is assigned (e.g., biased outcome assessment).</p></li>
+<li><p><strong>Allocation concealment</strong> protects against bias at the moment of enrollment <em>before</em> treatment is assigned.</p></li>
+</ul>
+<p>And this is exactly where <strong>block size</strong> becomes dangerous.</p>
+<section id="regulatory-and-reporting-standards-emphasize-concealment-not-disclosure-of-block-size" class="level2">
+<h2 class="anchored" data-anchor-id="regulatory-and-reporting-standards-emphasize-concealment-not-disclosure-of-block-size">Regulatory and Reporting Standards Emphasize Concealment — Not Disclosure of Block Size</h2>
+<p>Major regulatory and reporting guidance documents are clear about the importance of allocation concealment — but notably <strong>do not require disclosure of block size in protocols or SAPs</strong>.</p>
+<p><strong>ICH E9 (Statistical Principles for Clinical Trials)</strong></p>
+<p>ICH E9 states:</p>
+<blockquote class="blockquote">
+<p>“The method of randomisation should ensure that treatment allocation is unpredictable.”</p>
+</blockquote>
+<p>Unpredictability is the core principle. If the block size is known to investigators, predictability can arise — directly conflicting with this requirement.</p>
+<p><strong>ICH E6 (Good Clinical Practice)</strong></p>
+<p>ICH E6 emphasizes safeguarding the randomization process:</p>
+<blockquote class="blockquote">
+<p>“The investigator should ensure that the randomization procedures are followed and that the code is broken only in accordance with the protocol.”</p>
+</blockquote>
+<p>Maintaining control of the randomization schedule — including operational details like block size — is part of preserving its integrity.</p>
+<p><strong>CONSORT 2010 Statement</strong></p>
+<p>CONSORT distinguishes clearly between:</p>
+<ul>
+<li><p><strong>Sequence generation</strong></p></li>
+<li><p><strong>Allocation concealment mechanism</strong></p></li>
+</ul>
+<p>Item 9 of the CONSORT 2010 checklist requires:</p>
+<blockquote class="blockquote">
+<p>“Mechanism used to implement the random allocation sequence (such as sequentially numbered containers), describing any steps taken to conceal the sequence until interventions were assigned.”</p>
+</blockquote>
+<p>Importantly, CONSORT focuses on <em>how concealment was ensured</em>, not on revealing details that would undermine it.</p>
+</section>
+<section id="the-purpose-of-block-randomization" class="level2">
+<h2 class="anchored" data-anchor-id="the-purpose-of-block-randomization">The Purpose of Block Randomization</h2>
+<p>Block randomization is used to maintain approximate treatment balance throughout enrollment.</p>
+<p>For example, in a 1:1 trial with block size 4, each block contains:</p>
+<ul>
+<li><p>2 assignments to Treatment A</p></li>
+<li><p>2 assignments to Treatment B</p></li>
+</ul>
+<p>The order within the block is randomized. This helps prevent large imbalances if enrollment stops early.</p>
+</section>
+<section id="the-problem-predictability" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem-predictability">The Problem: Predictability</h2>
+<p>If investigators know the block size, allocation can become <strong>predictable</strong>.</p>
+<p>Imagine:</p>
+<ul>
+<li><p>1:1 randomization</p></li>
+<li><p>Block size = 4</p></li>
+<li><p>Three patients in a block have already been assigned: A, B, A</p></li>
+</ul>
+<p>What is the fourth assignment?</p>
+<p>It must be B.</p>
+<p>At that point, allocation is no longer random in practice — it is deducible.</p>
+<p>The mere ability to anticipate the next assignment can influence enrollment decisions in small but systematic ways:</p>
+<ul>
+<li><p>Delaying enrollment of a “difficult” patient</p></li>
+<li><p>Accelerating enrollment of a “good prognosis” patient</p></li>
+<li><p>Selectively enrolling borderline-eligible patients</p></li>
+</ul>
+<p>This introduces <strong>selection bias</strong>, even in a formally randomized trial. That is a failure of allocation concealment.</p>
+</section>
+<section id="allocation-concealment-blinding" class="level2">
+<h2 class="anchored" data-anchor-id="allocation-concealment-blinding">Allocation Concealment ≠ Blinding</h2>
+<p>Even in an open-label trial (no blinding), allocation concealment must still be protected.</p>
+<p>Blinding protects:</p>
+<ul>
+<li><p>Outcome assessment</p></li>
+<li><p>Patient behavior</p></li>
+<li><p>Investigator expectations</p></li>
+</ul>
+<p>Allocation concealment protects:</p>
+<ul>
+<li><strong>The integrity of who gets assigned what</strong></li>
+</ul>
+<p>You can have:</p>
+<ul>
+<li><p>A blinded trial with broken allocation concealment</p></li>
+<li><p>An open-label trial with perfect allocation concealment</p></li>
+</ul>
+<p>They are conceptually distinct safeguards.</p>
+</section>
+<section id="why-block-size-does-not-belong-in-the-protocol-or-sap" class="level2">
+<h2 class="anchored" data-anchor-id="why-block-size-does-not-belong-in-the-protocol-or-sap">Why Block Size Does Not Belong in the Protocol or SAP</h2>
+<p>The protocol and SAP are often widely distributed:</p>
+<ul>
+<li><p>Investigators</p></li>
+<li><p>Coordinators</p></li>
+<li><p>Sponsors</p></li>
+<li><p>Regulators</p></li>
+<li><p>Data monitoring committees</p></li>
+</ul>
+<p>If the block size is written there, it is no longer protected.</p>
+<p>Even stating: ““Randomization will use permuted blocks of size 4” is enough to compromise concealment.</p>
+<p>Best practice is:</p>
+<ul>
+<li><p>The protocol states that blocked randomization will be used.</p></li>
+<li><p>The SAP describes the randomization method in general terms.</p></li>
+<li><p>The <strong>actual block size (and any random variation in block size)</strong> is known only to:</p>
+<ul>
+<li><p>The unblinded statistician</p></li>
+<li><p>The randomization unit/vendor/system</p></li>
+</ul></li>
+</ul>
+<p>This protects allocation concealment while still maintaining transparency about the design.</p>
+</section>
+<section id="fixed-block-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="fixed-block-sizes">Fixed Block Sizes</h2>
+<p>Using a fixed block size makes predictability easier.</p>
+<p>A better approach is:</p>
+<ul>
+<li>Randomly varying block sizes (e.g., 2 and 4)</li>
+</ul>
+<p>This dramatically reduces predictability. But even then, disclosing the possible block sizes weakens protection.</p>
+</section>
+<section id="the-statistical-consequences-of-broken-allocation-concealment" class="level2">
+<h2 class="anchored" data-anchor-id="the-statistical-consequences-of-broken-allocation-concealment">The Statistical Consequences of Broken Allocation Concealment</h2>
+<p>Empirical evidence shows that trials with inadequate allocation concealment:</p>
+<ul>
+<li><p>Overestimate treatment effects</p></li>
+<li><p>Exhibit exaggerated efficacy signals</p></li>
+<li><p>Show increased selection bias</p></li>
+</ul>
+<p>This is not theoretical. Allocation concealment is one of the strongest methodological predictors of unbiased treatment effect estimates.</p>
+</section>
+<section id="what-the-protocol-should-say" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-protocol-should-say">What the Protocol <em>Should</em> Say</h2>
+<p>Instead of specifying block size, a protocol can say:</p>
+<blockquote class="blockquote">
+<p>Participants will be randomized in a 1:1 ratio using a centralized, computer-generated permuted block randomization schedule. Details of the randomization sequence will be maintained by the unblinded statistician to ensure allocation concealment.</p>
+</blockquote>
+<p>That is sufficient. Regulators do not require disclosure of block size in public-facing documents.</p>
+</section>
+<section id="takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="takeaway">Takeaway</h2>
+<ul>
+<li><p>Block size is an operational detail — not a scientific one.</p></li>
+<li><p>Its disclosure does not improve reproducibility, transparency, or statistical validity. But it can undermine allocation concealment.</p></li>
+<li><p>And once allocation concealment is compromised, the trial is vulnerable to selection bias even if it remains fully blinded.</p></li>
+<li><p>Protecting allocation concealment is protecting the integrity of randomization itself.</p></li>
+<li><p>Block size belongs with the unblinded randomization statistician/unit and nowhere else.</p></li>
+<li><p>Regulators do not require disclosure of block size in public-facing documents.</p></li>
+</ul>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><p>International Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use (ICH). <strong>ICH E9: Statistical Principles for Clinical Trials.</strong> 1998. Addendum (R1) on Estimands and Sensitivity Analysis in Clinical Trials. 2019.</p></li>
+<li><p>International Council for Harmonisation (ICH). <strong>ICH E6 (R2): Good Clinical Practice.</strong> 2016.</p></li>
+<li><p>Schulz KF, Altman DG, Moher D; for the CONSORT Group. <strong>CONSORT 2010 Statement: Updated guidelines for reporting parallel group randomized trials.</strong> <em>BMJ.</em> 2010;340:c332.</p></li>
+<li><p>Schulz KF, Chalmers I, Hayes RJ, Altman DG. <strong>Empirical evidence of bias: Dimensions of methodological quality associated with estimates of treatment effects in controlled trials.</strong> <em>JAMA.</em> 1995;273(5):408–412.</p></li>
+<li><p>Schulz KF, Grimes DA. <strong>Allocation concealment in randomised trials: Defending against deciphering.</strong> <em>Lancet.</em> 2002;359(9306):614–618.</p></li>
+<li><p>Moher D, Pham B, Jones A, et al.&nbsp;<strong>Does quality of reports of randomised trials affect estimates of intervention efficacy reported in meta-analyses?</strong> <em>Lancet.</em> 1998;352(9128):609–613.</p></li>
+<li><p>Savović J, Jones HE, Altman DG, et al.&nbsp;<strong>Influence of reported study design characteristics on intervention effect estimates from randomized, controlled trials: Combined analysis of meta-epidemiological studies.</strong> <em>Cochrane Database Syst Rev.</em> 2012;(3):MR000012.</p></li>
+</ol>
+
+
+</section>
+
+ ]]></description>
+  <category>trial design</category>
+  <category>randomization</category>
+  <guid>https://zuof.github.io/trial-notes/posts/block/</guid>
+  <pubDate>Fri, 13 Feb 2026 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Why Dichotomizing Continuous Variables Is a Mistake</title>
   <dc:creator>Fei Zuo</dc:creator>
@@ -20,10 +197,10 @@
 
 
 
-<p>Many applied papers still dichotomize continuous predictors. This feels simple. It is not harmless.</p>
+<p>Many trial analyses still dichotomize continuous predictors. This feels simple. It is not harmless.</p>
 <p>Let’s simulate a clean linear relationship and see what happens.</p>
 <section id="simulation-setup" class="level2">
-<h2 class="anchored" data-anchor-id="simulation-setup">Simulation Setup</h2>
+<h2 class="anchored" data-anchor-id="simulation-setup">Simulation setup</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -63,8 +240,8 @@ font-style: inherit;">data.frame</span>(x, y)</span></code></pre></div>
 </details>
 </div>
 </section>
-<section id="correct-model-continuous-predictor" class="level2">
-<h2 class="anchored" data-anchor-id="correct-model-continuous-predictor">Correct Model (Continuous Predictor)</h2>
+<section id="correct-model-using-a-continuous-predictor" class="level2">
+<h2 class="anchored" data-anchor-id="correct-model-using-a-continuous-predictor">Correct model using a continuous predictor</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -104,7 +281,7 @@ F-statistic:  1750 on 1 and 498 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </section>
 <section id="model-using-a-dichotomized-predictor" class="level2">
-<h2 class="anchored" data-anchor-id="model-using-a-dichotomized-predictor">Model Using a Dichotomized Predictor</h2>
+<h2 class="anchored" data-anchor-id="model-using-a-dichotomized-predictor">Model using a dichotomized predictor</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>

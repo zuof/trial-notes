@@ -4,42 +4,42 @@
     "href": "Posts.html",
     "title": "Posts",
     "section": "",
-    "text": "Why Dichotomizing Continuous Variables Is a Mistake\n\n\nA small simulation showing the information loss from categorizing predictors.\n\n\n\nregression\n\n\nmodelling\n\n\nsimulation\n\n\n\n\n\n\n\n\n\nFebruary 11, 2026\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Why Block Size Should Not Appear in the Protocol or SAP\n\n\nAllocation concealment is not the same as blinding — and publishing block size can compromise the integrity of randomization.\n\n\n\ntrial design\n\n\nrandomization\n\n\n\n\n\n\n\n\n\nFebruary 13, 2026\n\n\n6 min\n\n\n\n\n\n\n\nWhy Dichotomizing Continuous Variables Is a Mistake\n\n\nA small simulation showing the information loss from categorizing predictors.\n\n\n\nregression\n\n\nmodelling\n\n\nsimulation\n\n\n\n\n\n\n\n\n\nFebruary 11, 2026\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Trial-Notes",
     "section": "",
-    "text": "Why Dichotomizing Continuous Variables Is a Mistake\n\n\nA small simulation showing the information loss from categorizing predictors.\n\n\n\nregression\n\n\nmodelling\n\n\nsimulation\n\n\n\n\n\n\n\n\n\nFebruary 11, 2026\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Why Block Size Should Not Appear in the Protocol or SAP\n\n\nAllocation concealment is not the same as blinding — and publishing block size can compromise the integrity of randomization.\n\n\n\ntrial design\n\n\nrandomization\n\n\n\n\n\n\n\n\n\nFebruary 13, 2026\n\n\n6 min\n\n\n\n\n\n\n\nWhy Dichotomizing Continuous Variables Is a Mistake\n\n\nA small simulation showing the information loss from categorizing predictors.\n\n\n\nregression\n\n\nmodelling\n\n\nsimulation\n\n\n\n\n\n\n\n\n\nFebruary 11, 2026\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/dichotomize/index.html",
     "href": "posts/dichotomize/index.html",
     "title": "Why Dichotomizing Continuous Variables Is a Mistake",
     "section": "",
-    "text": "Many applied papers still dichotomize continuous predictors. This feels simple. It is not harmless.\nLet’s simulate a clean linear relationship and see what happens."
+    "text": "Many trial analyses still dichotomize continuous predictors. This feels simple. It is not harmless.\nLet’s simulate a clean linear relationship and see what happens."
   },
   {
     "objectID": "posts/dichotomize/index.html#simulation-setup",
     "href": "posts/dichotomize/index.html#simulation-setup",
     "title": "Why Dichotomizing Continuous Variables Is a Mistake",
-    "section": "Simulation Setup",
-    "text": "Simulation Setup\n\n\nCode\nset.seed(1)\n\nn &lt;- 500\nx &lt;- rnorm(n)\ny &lt;- 2*x + rnorm(n)\n\nd &lt;- data.frame(x, y)"
+    "section": "Simulation setup",
+    "text": "Simulation setup\n\n\nCode\nset.seed(1)\n\nn &lt;- 500\nx &lt;- rnorm(n)\ny &lt;- 2*x + rnorm(n)\n\nd &lt;- data.frame(x, y)"
   },
   {
-    "objectID": "posts/dichotomize/index.html#correct-model-continuous-predictor",
-    "href": "posts/dichotomize/index.html#correct-model-continuous-predictor",
+    "objectID": "posts/dichotomize/index.html#correct-model-using-a-continuous-predictor",
+    "href": "posts/dichotomize/index.html#correct-model-using-a-continuous-predictor",
     "title": "Why Dichotomizing Continuous Variables Is a Mistake",
-    "section": "Correct Model (Continuous Predictor)",
-    "text": "Correct Model (Continuous Predictor)\n\n\nCode\nfit_cont &lt;- lm(y ~ x, data = d)\nsummary(fit_cont)\n\n\n\nCall:\nlm(formula = y ~ x, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.94113 -0.74507  0.01663  0.72882  3.11131 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.04496    0.04730  -0.951    0.342    \nx            1.95692    0.04678  41.832   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.057 on 498 degrees of freedom\nMultiple R-squared:  0.7785,    Adjusted R-squared:  0.778 \nF-statistic:  1750 on 1 and 498 DF,  p-value: &lt; 2.2e-16"
+    "section": "Correct model using a continuous predictor",
+    "text": "Correct model using a continuous predictor\n\n\nCode\nfit_cont &lt;- lm(y ~ x, data = d)\nsummary(fit_cont)\n\n\n\nCall:\nlm(formula = y ~ x, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.94113 -0.74507  0.01663  0.72882  3.11131 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.04496    0.04730  -0.951    0.342    \nx            1.95692    0.04678  41.832   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.057 on 498 degrees of freedom\nMultiple R-squared:  0.7785,    Adjusted R-squared:  0.778 \nF-statistic:  1750 on 1 and 498 DF,  p-value: &lt; 2.2e-16"
   },
   {
     "objectID": "posts/dichotomize/index.html#model-using-a-dichotomized-predictor",
     "href": "posts/dichotomize/index.html#model-using-a-dichotomized-predictor",
     "title": "Why Dichotomizing Continuous Variables Is a Mistake",
-    "section": "Model Using a Dichotomized Predictor",
-    "text": "Model Using a Dichotomized Predictor\n\n\nCode\nd$x_cat &lt;- ifelse(d$x &gt; median(d$x), 1, 0)\n\nfit_cat &lt;- lm(y ~ x_cat, data = d)\nsummary(fit_cat)\n\n\n\nCall:\nlm(formula = y ~ x_cat, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.6942 -1.1305 -0.0022  1.0593  6.1757 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  -1.5672     0.1017  -15.42   &lt;2e-16 ***\nx_cat         3.1330     0.1438   21.79   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.607 on 498 degrees of freedom\nMultiple R-squared:  0.4881,    Adjusted R-squared:  0.4871 \nF-statistic: 474.9 on 1 and 498 DF,  p-value: &lt; 2.2e-16"
+    "section": "Model using a dichotomized predictor",
+    "text": "Model using a dichotomized predictor\n\n\nCode\nd$x_cat &lt;- ifelse(d$x &gt; median(d$x), 1, 0)\n\nfit_cat &lt;- lm(y ~ x_cat, data = d)\nsummary(fit_cat)\n\n\n\nCall:\nlm(formula = y ~ x_cat, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.6942 -1.1305 -0.0022  1.0593  6.1757 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  -1.5672     0.1017  -15.42   &lt;2e-16 ***\nx_cat         3.1330     0.1438   21.79   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.607 on 498 degrees of freedom\nMultiple R-squared:  0.4881,    Adjusted R-squared:  0.4871 \nF-statistic: 474.9 on 1 and 498 DF,  p-value: &lt; 2.2e-16"
   },
   {
     "objectID": "posts/dichotomize/index.html#comparing-r-squared",
@@ -54,6 +54,83 @@
     "title": "Why Dichotomizing Continuous Variables Is a Mistake",
     "section": "Takeaway",
     "text": "Takeaway\nCategorizing a continuous predictor reduces statistical efficiency and can distort inference. Unless there is a compelling clinical or decision-based reason, keep predictors continuous."
+  },
+  {
+    "objectID": "posts/block/index.html",
+    "href": "posts/block/index.html",
+    "title": "Why Block Size Should Not Appear in the Protocol or SAP",
+    "section": "",
+    "text": "In randomized trials, we talk a lot about blinding. But an equally important and subtly different concept is allocation concealment.\nThey are not the same thing.\nAnd this is exactly where block size becomes dangerous."
+  },
+  {
+    "objectID": "posts/block/index.html#regulatory-and-reporting-standards-emphasize-concealment-not-disclosure-of-block-size",
+    "href": "posts/block/index.html#regulatory-and-reporting-standards-emphasize-concealment-not-disclosure-of-block-size",
+    "title": "Why Block Size Should Not Appear in the Protocol or SAP",
+    "section": "Regulatory and Reporting Standards Emphasize Concealment — Not Disclosure of Block Size",
+    "text": "Regulatory and Reporting Standards Emphasize Concealment — Not Disclosure of Block Size\nMajor regulatory and reporting guidance documents are clear about the importance of allocation concealment — but notably do not require disclosure of block size in protocols or SAPs.\nICH E9 (Statistical Principles for Clinical Trials)\nICH E9 states:\n\n“The method of randomisation should ensure that treatment allocation is unpredictable.”\n\nUnpredictability is the core principle. If the block size is known to investigators, predictability can arise — directly conflicting with this requirement.\nICH E6 (Good Clinical Practice)\nICH E6 emphasizes safeguarding the randomization process:\n\n“The investigator should ensure that the randomization procedures are followed and that the code is broken only in accordance with the protocol.”\n\nMaintaining control of the randomization schedule — including operational details like block size — is part of preserving its integrity.\nCONSORT 2010 Statement\nCONSORT distinguishes clearly between:\n\nSequence generation\nAllocation concealment mechanism\n\nItem 9 of the CONSORT 2010 checklist requires:\n\n“Mechanism used to implement the random allocation sequence (such as sequentially numbered containers), describing any steps taken to conceal the sequence until interventions were assigned.”\n\nImportantly, CONSORT focuses on how concealment was ensured, not on revealing details that would undermine it."
+  },
+  {
+    "objectID": "posts/block/index.html#the-purpose-of-block-randomization",
+    "href": "posts/block/index.html#the-purpose-of-block-randomization",
+    "title": "Why Block Size Should Not Appear in the Protocol or SAP",
+    "section": "The Purpose of Block Randomization",
+    "text": "The Purpose of Block Randomization\nBlock randomization is used to maintain approximate treatment balance throughout enrollment.\nFor example, in a 1:1 trial with block size 4, each block contains:\n\n2 assignments to Treatment A\n2 assignments to Treatment B\n\nThe order within the block is randomized. This helps prevent large imbalances if enrollment stops early."
+  },
+  {
+    "objectID": "posts/block/index.html#the-problem-predictability",
+    "href": "posts/block/index.html#the-problem-predictability",
+    "title": "Why Block Size Should Not Appear in the Protocol or SAP",
+    "section": "The Problem: Predictability",
+    "text": "The Problem: Predictability\nIf investigators know the block size, allocation can become predictable.\nImagine:\n\n1:1 randomization\nBlock size = 4\nThree patients in a block have already been assigned: A, B, A\n\nWhat is the fourth assignment?\nIt must be B.\nAt that point, allocation is no longer random in practice — it is deducible.\nThe mere ability to anticipate the next assignment can influence enrollment decisions in small but systematic ways:\n\nDelaying enrollment of a “difficult” patient\nAccelerating enrollment of a “good prognosis” patient\nSelectively enrolling borderline-eligible patients\n\nThis introduces selection bias, even in a formally randomized trial. That is a failure of allocation concealment."
+  },
+  {
+    "objectID": "posts/block/index.html#allocation-concealment-blinding",
+    "href": "posts/block/index.html#allocation-concealment-blinding",
+    "title": "Why Block Size Should Not Appear in the Protocol or SAP",
+    "section": "Allocation Concealment ≠ Blinding",
+    "text": "Allocation Concealment ≠ Blinding\nEven in an open-label trial (no blinding), allocation concealment must still be protected.\nBlinding protects:\n\nOutcome assessment\nPatient behavior\nInvestigator expectations\n\nAllocation concealment protects:\n\nThe integrity of who gets assigned what\n\nYou can have:\n\nA blinded trial with broken allocation concealment\nAn open-label trial with perfect allocation concealment\n\nThey are conceptually distinct safeguards."
+  },
+  {
+    "objectID": "posts/block/index.html#why-block-size-does-not-belong-in-the-protocol-or-sap",
+    "href": "posts/block/index.html#why-block-size-does-not-belong-in-the-protocol-or-sap",
+    "title": "Why Block Size Should Not Appear in the Protocol or SAP",
+    "section": "Why Block Size Does Not Belong in the Protocol or SAP",
+    "text": "Why Block Size Does Not Belong in the Protocol or SAP\nThe protocol and SAP are often widely distributed:\n\nInvestigators\nCoordinators\nSponsors\nRegulators\nData monitoring committees\n\nIf the block size is written there, it is no longer protected.\nEven stating: ““Randomization will use permuted blocks of size 4” is enough to compromise concealment.\nBest practice is:\n\nThe protocol states that blocked randomization will be used.\nThe SAP describes the randomization method in general terms.\nThe actual block size (and any random variation in block size) is known only to:\n\nThe unblinded statistician\nThe randomization unit/vendor/system\n\n\nThis protects allocation concealment while still maintaining transparency about the design."
+  },
+  {
+    "objectID": "posts/block/index.html#fixed-block-sizes",
+    "href": "posts/block/index.html#fixed-block-sizes",
+    "title": "Why Block Size Should Not Appear in the Protocol or SAP",
+    "section": "Fixed Block Sizes",
+    "text": "Fixed Block Sizes\nUsing a fixed block size makes predictability easier.\nA better approach is:\n\nRandomly varying block sizes (e.g., 2 and 4)\n\nThis dramatically reduces predictability. But even then, disclosing the possible block sizes weakens protection."
+  },
+  {
+    "objectID": "posts/block/index.html#the-statistical-consequences-of-broken-allocation-concealment",
+    "href": "posts/block/index.html#the-statistical-consequences-of-broken-allocation-concealment",
+    "title": "Why Block Size Should Not Appear in the Protocol or SAP",
+    "section": "The Statistical Consequences of Broken Allocation Concealment",
+    "text": "The Statistical Consequences of Broken Allocation Concealment\nEmpirical evidence shows that trials with inadequate allocation concealment:\n\nOverestimate treatment effects\nExhibit exaggerated efficacy signals\nShow increased selection bias\n\nThis is not theoretical. Allocation concealment is one of the strongest methodological predictors of unbiased treatment effect estimates."
+  },
+  {
+    "objectID": "posts/block/index.html#what-the-protocol-should-say",
+    "href": "posts/block/index.html#what-the-protocol-should-say",
+    "title": "Why Block Size Should Not Appear in the Protocol or SAP",
+    "section": "What the Protocol Should Say",
+    "text": "What the Protocol Should Say\nInstead of specifying block size, a protocol can say:\n\nParticipants will be randomized in a 1:1 ratio using a centralized, computer-generated permuted block randomization schedule. Details of the randomization sequence will be maintained by the unblinded statistician to ensure allocation concealment.\n\nThat is sufficient. Regulators do not require disclosure of block size in public-facing documents."
+  },
+  {
+    "objectID": "posts/block/index.html#takeaway",
+    "href": "posts/block/index.html#takeaway",
+    "title": "Why Block Size Should Not Appear in the Protocol or SAP",
+    "section": "Takeaway",
+    "text": "Takeaway\n\nBlock size is an operational detail — not a scientific one.\nIts disclosure does not improve reproducibility, transparency, or statistical validity. But it can undermine allocation concealment.\nAnd once allocation concealment is compromised, the trial is vulnerable to selection bias even if it remains fully blinded.\nProtecting allocation concealment is protecting the integrity of randomization itself.\nBlock size belongs with the unblinded randomization statistician/unit and nowhere else.\nRegulators do not require disclosure of block size in public-facing documents."
+  },
+  {
+    "objectID": "posts/block/index.html#references",
+    "href": "posts/block/index.html#references",
+    "title": "Why Block Size Should Not Appear in the Protocol or SAP",
+    "section": "References",
+    "text": "References\n\nInternational Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use (ICH). ICH E9: Statistical Principles for Clinical Trials. 1998. Addendum (R1) on Estimands and Sensitivity Analysis in Clinical Trials. 2019.\nInternational Council for Harmonisation (ICH). ICH E6 (R2): Good Clinical Practice. 2016.\nSchulz KF, Altman DG, Moher D; for the CONSORT Group. CONSORT 2010 Statement: Updated guidelines for reporting parallel group randomized trials. BMJ. 2010;340:c332.\nSchulz KF, Chalmers I, Hayes RJ, Altman DG. Empirical evidence of bias: Dimensions of methodological quality associated with estimates of treatment effects in controlled trials. JAMA. 1995;273(5):408–412.\nSchulz KF, Grimes DA. Allocation concealment in randomised trials: Defending against deciphering. Lancet. 2002;359(9306):614–618.\nMoher D, Pham B, Jones A, et al. Does quality of reports of randomised trials affect estimates of intervention efficacy reported in meta-analyses? Lancet. 1998;352(9128):609–613.\nSavović J, Jones HE, Altman DG, et al. Influence of reported study design characteristics on intervention effect estimates from randomized, controlled trials: Combined analysis of meta-epidemiological studies. Cochrane Database Syst Rev. 2012;(3):MR000012."
   },
   {
     "objectID": "about.html",
