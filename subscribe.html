@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Posts – trial-notes</title>
+<title>Subscribe – trial-notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,35 +66,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-subtitle','listing-description','listing-categories','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XXXXX"></script>
 
 <script type="text/javascript">
@@ -107,40 +76,13 @@ gtag('js', new Date());
 gtag('config', 'G-XXXXX', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="trial-notes" href="Posts.xml" data-external="1"><meta property="og:title" content="Posts – trial-notes">
+<meta property="og:title" content="Subscribe – trial-notes">
+<meta property="og:description" content="Notes on trial design and analysis">
 <meta property="og:site_name" content="trial-notes">
-<meta name="twitter:title" content="Posts – trial-notes">
+<meta name="twitter:title" content="Subscribe – trial-notes">
+<meta name="twitter:description" content="Notes on trial design and analysis">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -170,13 +112,13 @@ window.Quarto = {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./Posts.html" aria-current="page"> 
+    <a class="nav-link" href="./Posts.html"> 
 <span class="menu-text">Posts</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./subscribe.html"> 
+    <a class="nav-link active" href="./subscribe.html" aria-current="page"> 
 <span class="menu-text">Subscribe</span></a>
   </li>  
   <li class="nav-item compact">
@@ -195,15 +137,21 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#subscribe-via-rss" id="toc-subscribe-via-rss" class="nav-link active" data-scroll-target="#subscribe-via-rss">Subscribe via RSS</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Posts</h1>
+<h1 class="title">Subscribe</h1>
 </div>
 
 
@@ -220,82 +168,16 @@ window.Quarto = {
 </header>
 
 
+<section id="subscribe-via-rss" class="level3">
+<h3 class="anchored" data-anchor-id="subscribe-via-rss">Subscribe via RSS</h3>
+<p>Copy this link into your RSS reader:</p>
+<p><a href="https://zuof.github.io/trial-notes/index.xml"><code>https://zuof.github.io/trial-notes/index.xml</code></a></p>
+<p>Recommended readers: Feedly, Inoreader, NetNewsWire.</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="trial design,randomization" data-listing-date-sort="1770958800000" data-listing-file-modified-sort="1771087362083" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="984">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/block/index.html" class="no-external">Why Block Size Should Not Appear in the Protocol or SAP</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/block/index.html" class="no-external">Allocation concealment is not the same as blinding and publishing block size can compromise the integrity of randomization.</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('trial design'); return false;">
-trial design
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('randomization'); return false;">
-randomization
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/block/index.html" class="no-external">In randomized trials, we talk a lot about blinding. But an equally important and subtly different concept is allocation concealment.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/block/index.html" class="no-external">
-<div class="listing-date">
-February 13, 2026
-</div>
-<div class="listing-reading-time">
-5 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="regression,modelling,simulation" data-listing-date-sort="1770786000000" data-listing-file-modified-sort="1771087337752" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="118">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/dichotomize/index.html" class="no-external">Why Dichotomizing Continuous Variables Is a Mistake</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/dichotomize/index.html" class="no-external">A small simulation showing the information loss from categorizing predictors.</a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('regression'); return false;">
-regression
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('modelling'); return false;">
-modelling
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('simulation'); return false;">
-simulation
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/dichotomize/index.html" class="no-external">Many clinical trial analyses still dichotomize continuous predictors. This feels simple. It is not harmless.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/dichotomize/index.html" class="no-external">
-<div class="listing-date">
-February 11, 2026
-</div>
-<div class="listing-reading-time">
-1 min
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
