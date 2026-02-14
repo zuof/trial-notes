@@ -97,6 +97,15 @@ ul.task-list li input[type="checkbox"] {
     }
   })
   </script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XXXXX"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXX', { 'anonymize_ip': true});
+</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -129,7 +138,11 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="trial-notes" href="Posts.xml" data-external="1"></head>
+<link rel="alternate" type="application/rss+xml" title="trial-notes" href="Posts.xml" data-external="1"><meta property="og:title" content="Posts – trial-notes">
+<meta property="og:site_name" content="trial-notes">
+<meta name="twitter:title" content="Posts – trial-notes">
+<meta name="twitter:card" content="summary">
+</head>
 
 <body class="nav-fixed">
 
@@ -159,6 +172,13 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link active" href="./Posts.html" aria-current="page"> 
 <span class="menu-text">Posts</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="./index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
